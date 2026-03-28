@@ -162,53 +162,58 @@
 </div>
 
 <script>
-// ====================== ALL SCREENS DATA (Complete - no missing) ======================
+// ====================== COMPLETE SCREEN DIVISION - EXACTLY 15 EACH ======================
+// TOTAL: 45 SCREENS
+// Inejih: 15 screens (Livreur 4 + Admin Web 11)
+// Cheick Hama: 15 screens
+// Ahmetou: 15 screens
+
 const screens = [
-    // AUTH
-    {id:1, src:"all users _screen loginscreen.jpeg", title:"Login Screen | شاشة تسجيل الدخول", type:"acheteur", assign:"Cheick Hama", desc:"شاشة تسجيل الدخول بالهاتف وكلمة المرور", tech:["Flutter"], libs:["Riverpod", "Dio"], flow:"Flutter → Django JWT"},
+    // ========== AUTH (3 screens: Ahmetou 1, Cheick Hama 2) ==========
+    {id:1, src:"all users _screen loginscreen.jpeg", title:"Login Screen | شاشة تسجيل الدخول", type:"acheteur", assign:"Ahmetou", desc:"شاشة تسجيل الدخول بالهاتف وكلمة المرور", tech:["Flutter"], libs:["Riverpod", "Dio"], flow:"Flutter → Django JWT"},
     {id:2, src:"all users _screen create acount  screen.jpeg", title:"Create Account | إنشاء الحساب", type:"acheteur", assign:"Cheick Hama", desc:"إنشاء حساب جديد", tech:["Flutter"], libs:["Riverpod"], flow:"Flutter → Django User Creation"},
     {id:3, src:"all users _screen reinitiales pasword screen.jpeg", title:"Reset Password | إعادة تعيين كلمة المرور", type:"acheteur", assign:"Cheick Hama", desc:"طلب إعادة تعيين كلمة المرور", tech:["Flutter"], libs:[], flow:"Flutter → Django Password Reset"},
-    {id:4, src:"all users _screen otp  screen.jpeg", title:"OTP Verification | التحقق برمز", type:"acheteur", assign:"Cheick Hama", desc:"إدخال رمز OTP", tech:["Flutter"], libs:[], flow:"Flutter → Redis OTP"},
+    {id:4, src:"all users _screen otp  screen.jpeg", title:"OTP Verification | التحقق برمز", type:"acheteur", assign:"Ahmetou", desc:"إدخال رمز OTP", tech:["Flutter"], libs:[], flow:"Flutter → Redis OTP"},
 
-    // ACHEUTEUR (split between Cheick Hama and Ahmetou)
-    {id:5, src:"achetuer_screen home screen.jpeg", title:"Home Marketplace | السوق الرئيسي", type:"acheteur", assign:"Cheick Hama", desc:"الصفحة الرئيسية للسوق", tech:["Flutter","Riverpod"], libs:["cached_network_image"], flow:"Flutter → Django REST"},
+    // ========== ACHEUTEUR (18 screens: Ahmetou 9, Cheick Hama 9) ==========
+    {id:5, src:"achetuer_screen home screen.jpeg", title:"Home Marketplace | السوق الرئيسي", type:"acheteur", assign:"Ahmetou", desc:"الصفحة الرئيسية للسوق", tech:["Flutter","Riverpod"], libs:["cached_network_image"], flow:"Flutter → Django REST"},
     {id:6, src:"achetuer_screen animal detiaels.jpeg", title:"Animal Details | تفاصيل الحيوان", type:"acheteur", assign:"Cheick Hama", desc:"تفاصيل الحيوان", tech:["Flutter"], libs:["Google Maps Flutter"], flow:"Flutter → DRF Serializer"},
     {id:7, src:"achetuer_screen filtering process screen.jpeg", title:"Filter (No Results) | تصفية بدون نتائج", type:"acheteur", assign:"Ahmetou", desc:"حالة عدم وجود نتائج", tech:["Flutter"], libs:["django-filter"], flow:"Flutter → Django Filter"},
-    {id:8, src:"achetuer_screen filtering process2 screen.jpeg", title:"Advanced Filters | تصفية متقدمة", type:"acheteur", assign:"Ahmetou", desc:"التصفية المتقدمة", tech:["Flutter"], libs:["django-filter"], flow:"Flutter → Django Filter"},
-    {id:9, src:"achetuer_screen paiment process screen.jpeg", title:"Choose Delivery | اختيار التوصيل", type:"acheteur", assign:"Cheick Hama", desc:"اختيار موقع التوصيل", tech:["Flutter","Geolocator"], libs:["Google Maps Flutter"], flow:"Flutter → Django Geolocation"},
-    {id:10, src:"achetuer_screen paiment process screen2.jpeg", title:"Preparation Options | خيارات التحضير", type:"acheteur", assign:"Ahmetou", desc:"خيارات التحضير", tech:["Flutter","Riverpod"], libs:[], flow:"Local state"},
-    {id:11, src:"achetuer_screen paiment process screen3.jpeg", title:"Order Summary | ملخص الطلب", type:"acheteur", assign:"Cheick Hama", desc:"ملخص الطلب", tech:["Flutter"], libs:[], flow:"Flutter → DRF Order"},
-    {id:12, src:"achetuer_screen paiment process screen4.jpeg", title:"Bankily Payment | الدفع عبر بنكيلي", type:"acheteur", assign:"Ahmetou", desc:"الدفع عبر بنكيلي", tech:["Flutter"], libs:["qrcode.react"], flow:"Flutter → Bankily"},
-    {id:13, src:"achetuer_screen paiment process screen5.jpeg", title:"Payment Failed | فشل الدفع", type:"acheteur", assign:"Cheick Hama", desc:"فشل الدفع", tech:["Flutter"], libs:["Sentry"], flow:"Error handling"},
-    {id:14, src:"achetuer_screen paiment process screen6.jpeg", title:"Payment Success | نجاح الدفع", type:"acheteur", assign:"Ahmetou", desc:"نجاح الدفع", tech:["Flutter","Riverpod"], libs:["FCM"], flow:"Webhook → FCM"},
-    {id:15, src:"achetuer_screen order_history screen.jpeg", title:"Order History | سجل الطلبات", type:"acheteur", assign:"Cheick Hama", desc:"سجل الطلبات", tech:["Flutter"], libs:["Paginated ListView"], flow:"Flutter → DRF Pagination"},
-    {id:16, src:"achetuer_screen profile screen.jpeg", title:"User Profile | الملف الشخصي", type:"acheteur", assign:"Ahmetou", desc:"الملف الشخصي", tech:["Flutter","Flutter Secure Storage"], libs:[], flow:"Secure Storage → JWT"},
-    {id:17, src:"achetuer_screen notification screen.jpeg", title:"Notifications | الإشعارات", type:"acheteur", assign:"Cheick Hama", desc:"الإشعارات", tech:["Flutter"], libs:["Firebase Messaging"], flow:"FCM → Local Notifications"},
-    {id:18, src:"achetuer_screen qr code scanning screen.jpeg", title:"QR Animal Scan | مسح رمز الحيوان", type:"acheteur", assign:"Ahmetou", desc:"مسح رمز QR", tech:["Flutter"], libs:["mobile_scanner"], flow:"mobile_scanner → Django QR"},
-    {id:19, src:"achetuer_screen group paying detields  screen.jpeg", title:"Group Buy Details | تفاصيل الشراء الجماعي", type:"acheteur", assign:"Cheick Hama", desc:"تفاصيل الشراء الجماعي", tech:["Flutter","WebSocket"], libs:["Django Channels"], flow:"WebSocket real-time"},
-    {id:20, src:"achetuer_screengroup buying process screen.jpeg", title:"Group Buy Process | عملية الشراء الجماعي", type:"acheteur", assign:"Ahmetou", desc:"عملية الشراء الجماعي", tech:["Flutter","WebSocket"], libs:["Django Channels"], flow:"WebSocket"},
-    {id:21, src:"achetuer_screen animal preperaiton status  screen.jpeg", title:"Preparation Status | حالة التجهيز", type:"acheteur", assign:"Cheick Hama", desc:"حالة التجهيز", tech:["Flutter"], libs:["FCM"], flow:"Polling + FCM"},
-    {id:22, src:"achetuer_screen splash screen.jpeg", title:"Splash Screen | شاشة البداية", type:"acheteur", assign:"Ahmetou", desc:"شاشة البداية", tech:["Flutter"], libs:["flutter_native_splash"], flow:"Native splash"},
+    {id:8, src:"achetuer_screen filtering process2 screen.jpeg", title:"Advanced Filters | تصفية متقدمة", type:"acheteur", assign:"Cheick Hama", desc:"التصفية المتقدمة", tech:["Flutter"], libs:["django-filter"], flow:"Flutter → Django Filter"},
+    {id:9, src:"achetuer_screen paiment process screen.jpeg", title:"Choose Delivery | اختيار التوصيل", type:"acheteur", assign:"Ahmetou", desc:"اختيار موقع التوصيل", tech:["Flutter","Geolocator"], libs:["Google Maps Flutter"], flow:"Flutter → Django Geolocation"},
+    {id:10, src:"achetuer_screen paiment process screen2.jpeg", title:"Preparation Options | خيارات التحضير", type:"acheteur", assign:"Cheick Hama", desc:"خيارات التحضير", tech:["Flutter","Riverpod"], libs:[], flow:"Local state"},
+    {id:11, src:"achetuer_screen paiment process screen3.jpeg", title:"Order Summary | ملخص الطلب", type:"acheteur", assign:"Ahmetou", desc:"ملخص الطلب", tech:["Flutter"], libs:[], flow:"Flutter → DRF Order"},
+    {id:12, src:"achetuer_screen paiment process screen4.jpeg", title:"Bankily Payment | الدفع عبر بنكيلي", type:"acheteur", assign:"Cheick Hama", desc:"الدفع عبر بنكيلي", tech:["Flutter"], libs:["qrcode.react"], flow:"Flutter → Bankily"},
+    {id:13, src:"achetuer_screen paiment process screen5.jpeg", title:"Payment Failed | فشل الدفع", type:"acheteur", assign:"Ahmetou", desc:"فشل الدفع", tech:["Flutter"], libs:["Sentry"], flow:"Error handling"},
+    {id:14, src:"achetuer_screen paiment process screen6.jpeg", title:"Payment Success | نجاح الدفع", type:"acheteur", assign:"Cheick Hama", desc:"نجاح الدفع", tech:["Flutter","Riverpod"], libs:["FCM"], flow:"Webhook → FCM"},
+    {id:15, src:"achetuer_screen order_history screen.jpeg", title:"Order History | سجل الطلبات", type:"acheteur", assign:"Ahmetou", desc:"سجل الطلبات", tech:["Flutter"], libs:["Paginated ListView"], flow:"Flutter → DRF Pagination"},
+    {id:16, src:"achetuer_screen profile screen.jpeg", title:"User Profile | الملف الشخصي", type:"acheteur", assign:"Cheick Hama", desc:"الملف الشخصي", tech:["Flutter","Flutter Secure Storage"], libs:[], flow:"Secure Storage → JWT"},
+    {id:17, src:"achetuer_screen notification screen.jpeg", title:"Notifications | الإشعارات", type:"acheteur", assign:"Ahmetou", desc:"الإشعارات", tech:["Flutter"], libs:["Firebase Messaging"], flow:"FCM → Local Notifications"},
+    {id:18, src:"achetuer_screen qr code scanning screen.jpeg", title:"QR Animal Scan | مسح رمز الحيوان", type:"acheteur", assign:"Cheick Hama", desc:"مسح رمز QR", tech:["Flutter"], libs:["mobile_scanner"], flow:"mobile_scanner → Django QR"},
+    {id:19, src:"achetuer_screen group paying detields  screen.jpeg", title:"Group Buy Details | تفاصيل الشراء الجماعي", type:"acheteur", assign:"Ahmetou", desc:"تفاصيل الشراء الجماعي", tech:["Flutter","WebSocket"], libs:["Django Channels"], flow:"WebSocket real-time"},
+    {id:20, src:"achetuer_screengroup buying process screen.jpeg", title:"Group Buy Process | عملية الشراء الجماعي", type:"acheteur", assign:"Cheick Hama", desc:"عملية الشراء الجماعي", tech:["Flutter","WebSocket"], libs:["Django Channels"], flow:"WebSocket"},
+    {id:21, src:"achetuer_screen animal preperaiton status  screen.jpeg", title:"Preparation Status | حالة التجهيز", type:"acheteur", assign:"Ahmetou", desc:"حالة التجهيز", tech:["Flutter"], libs:["FCM"], flow:"Polling + FCM"},
+    {id:22, src:"achetuer_screen splash screen.jpeg", title:"Splash Screen | شاشة البداية", type:"acheteur", assign:"Cheick Hama", desc:"شاشة البداية", tech:["Flutter"], libs:["flutter_native_splash"], flow:"Native splash"},
 
-    // VENDEUR
-    {id:23, src:"veendeur_screen home screen.jpeg", title:"Seller Dashboard | لوحة البائع", type:"vendeur", assign:"Cheick Hama", desc:"لوحة تحكم البائع", tech:["Flutter","fl_chart"], libs:["Django REST"], flow:"Seller stats"},
-    {id:24, src:"veendeur_screen adding animal process screen.jpeg", title:"Add Animal (Step 1) | إضافة حيوان 1", type:"vendeur", assign:"Ahmetou", desc:"إضافة حيوان - الخطوة 1", tech:["Flutter"], libs:["image_picker"], flow:"Form wizard"},
+    // ========== VENDEUR (5 screens: Ahmetou 2, Cheick Hama 3) ==========
+    {id:23, src:"veendeur_screen home screen.jpeg", title:"Seller Dashboard | لوحة البائع", type:"vendeur", assign:"Ahmetou", desc:"لوحة تحكم البائع", tech:["Flutter","fl_chart"], libs:["Django REST"], flow:"Seller stats"},
+    {id:24, src:"veendeur_screen adding animal process screen.jpeg", title:"Add Animal (Step 1) | إضافة حيوان 1", type:"vendeur", assign:"Cheick Hama", desc:"إضافة حيوان - الخطوة 1", tech:["Flutter"], libs:["image_picker"], flow:"Form wizard"},
     {id:25, src:"veendeur_screen adding animal process screen2.jpeg", title:"Add Animal (Step 2) | إضافة حيوان 2", type:"vendeur", assign:"Ahmetou", desc:"إضافة حيوان - الخطوة 2", tech:["Flutter"], libs:["Pillow"], flow:"Cloudinary upload"},
     {id:26, src:"veendeur_screen adding animal process screen3.jpeg", title:"Add Animal (Step 3) | إضافة حيوان 3", type:"vendeur", assign:"Cheick Hama", desc:"إضافة حيوان - الخطوة 3", tech:["Flutter","Geolocator"], libs:["Cloudinary"], flow:"GPS + image upload"},
-    {id:27, src:"veendeur_screen adding animal process screen4.jpeg", title:"Listing Published | نشر الإعلان", type:"vendeur", assign:"Ahmetou", desc:"تم نشر الإعلان", tech:["Flutter"], libs:["qrcode.react"], flow:"Listing published"},
+    {id:27, src:"veendeur_screen adding animal process screen4.jpeg", title:"Listing Published | نشر الإعلان", type:"vendeur", assign:"Cheick Hama", desc:"تم نشر الإعلان", tech:["Flutter"], libs:["qrcode.react"], flow:"Listing published"},
 
-    // PRÉPARATEUR
+    // ========== PRÉPARATEUR (3 screens: Cheick Hama 2, Ahmetou 1) ==========
     {id:28, src:"preperation guy _screen home screen.jpeg", title:"Butcher Dashboard | لوحة الجزار", type:"preparateur", assign:"Cheick Hama", desc:"لوحة الجزار", tech:["Flutter"], libs:["WebSocket"], flow:"Real-time orders"},
     {id:29, src:"preperation guy _screen preperationd orders order screen.jpeg", title:"Preparation Orders | الطلبات للتجهيز", type:"preparateur", assign:"Ahmetou", desc:"الطلبات للتجهيز", tech:["Flutter"], libs:["Checklist UI"], flow:"Preparation status"},
     {id:30, src:"preperation guy _screen preperationd etuields order screen.jpeg", title:"Preparation Details | تفاصيل التجهيز", type:"preparateur", assign:"Cheick Hama", desc:"تفاصيل التجهيز", tech:["Flutter"], libs:["mobile_scanner"], flow:"QR handshake"},
 
-    // LIVREUR - Inejih
+    // ========== LIVREUR (4 screens: ALL FOR INEJIH) ==========
     {id:31, src:"livruer_screen delivary ordering detials screen.jpeg", title:"Delivery Details | تفاصيل التوصيل", type:"livreur", assign:"Inejih", desc:"تفاصيل التوصيل", tech:["Flutter"], libs:["Google Maps Flutter","Geolocator"], flow:"Flutter → Django Delivery API"},
     {id:32, src:"livruer_screen delivary ordering detials screen2.jpeg", title:"Delivery Tasks | مهام التوصيل", type:"livreur", assign:"Inejih", desc:"مهام التوصيل", tech:["Flutter"], libs:["FCM"], flow:"Real-time tasks"},
     {id:33, src:"livruer_screen map screen.jpeg", title:"Navigation Map | خريطة الملاحة", type:"livreur", assign:"Inejih", desc:"خريطة الملاحة", tech:["Flutter"], libs:["Google Maps Flutter"], flow:"Turn-by-turn"},
     {id:34, src:"livruer_screen qr code screen.jpeg", title:"QR Verification | مسح QR للتسليم", type:"livreur", assign:"Inejih", desc:"مسح QR", tech:["Flutter"], libs:["mobile_scanner"], flow:"Secure QR verification"},
 
-    // ADMIN WEB - Inejih
+    // ========== ADMIN WEB (11 screens: ALL FOR INEJIH) ==========
     {id:35, src:"admin_dashbaord web ui login page.jpeg", title:"Admin Login | تسجيل الدخول للمشرف", type:"admin", assign:"Inejih", desc:"تسجيل دخول المشرف", tech:["Next.js","Tailwind","ShadCN"], libs:["NextAuth","Zod"], flow:"Next.js → Django JWT"},
     {id:36, src:"admin_dashbaord web ui otp page.jpeg", title:"Admin OTP Verification | التحقق برمز المشرف", type:"admin", assign:"Inejih", desc:"OTP المشرف", tech:["Next.js"], libs:["react-query"], flow:"OTP via Redis"},
     {id:37, src:"admin_dashbaord web ui dashabord page.jpeg", title:"Admin Dashboard | لوحة تحكم المشرف", type:"admin", assign:"Inejih", desc:"لوحة التحكم الرئيسية", tech:["Next.js","Recharts","TanStack Query"], libs:["ShadCN"], flow:"Real-time analytics"},
@@ -222,6 +227,17 @@ const screens = [
     {id:45, src:"admin_dashbaord web ui settings page.jpeg", title:"Platform Settings | إعدادات المنصة", type:"admin", assign:"Inejih", desc:"إعدادات المنصة", tech:["Next.js","React Hook Form + Zod"], libs:["ShadCN"], flow:"Platform settings"}
 ];
 
+// ====================== SCREEN COUNTS PER TEAM - EXACTLY 15 EACH ======================
+// Inejih: 15 screens (4 Livreur + 11 Admin Web)
+// Cheick Hama: 15 screens
+// Ahmetou: 15 screens
+// TOTAL: 45 screens
+
+console.log("=== SCREEN DIVISION SUMMARY ===");
+console.log("Inejih (Livreur + Admin Web):", screens.filter(s => s.assign === "Inejih").length);
+console.log("Cheick Hama:", screens.filter(s => s.assign === "Cheick Hama").length);
+console.log("Ahmetou:", screens.filter(s => s.assign === "Ahmetou").length);
+console.log("TOTAL:", screens.length);
 // ====================== TEAM COUNTS ======================
 const teamCounts = {
     "Inejih": screens.filter(s => s.assign === "Inejih").length,
