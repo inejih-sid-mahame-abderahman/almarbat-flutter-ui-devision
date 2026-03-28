@@ -1,497 +1,402 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>ALMARBAT · Dev Intelligence Hub | Screens + Tech Specs + Team Assignment</title>
+    <title>ALMARBAT • عرض شاشات التطبيق | تقسيم العمل + التحليل التقني</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cairo:wght@400;500;600;700&display=swap');
+        
+        :root { --primary: #1f6e43; }
+        
+        * { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+        
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', 'Inter', 'SF Pro Text', Roboto, Helvetica, sans-serif;
-            background: #f4f7fc;
-            color: #0f172a;
-            scroll-behavior: smooth;
+            font-family: 'Cairo', 'Inter', system-ui, sans-serif;
         }
-
-        /* custom scroll */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #e2e8f0; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb { background: #1f6e43; border-radius: 10px; }
-
-        .sticky-header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(18px);
-            border-bottom: 1px solid rgba(31, 110, 67, 0.2);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        
+        .header-gradient {
+            background: linear-gradient(135deg, #1f6e43, #2b8c5e);
         }
-
-        .header-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem 2rem 0.8rem 2rem;
-        }
-
-        .title-section h1 {
-            font-size: 2.1rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #166534, #2b8c5e, #3aa876);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        .filter-bar {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.6rem;
-            margin: 1rem 0 0.2rem;
-        }
-
-        .filter-btn {
-            background: white;
-            border: 1px solid #e2e8f0;
-            padding: 0.5rem 1.3rem;
-            font-weight: 600;
-            border-radius: 60px;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 0.85rem;
-        }
-
-        .filter-btn.active {
-            background: #1f6e43;
-            border-color: #1f6e43;
-            color: white;
-            box-shadow: 0 6px 14px rgba(31, 110, 67, 0.2);
-        }
-
-        /* team stats dashboard */
-        .team-dashboard {
-            max-width: 1400px;
-            margin: 1.5rem auto 0;
-            padding: 0 2rem;
-        }
-        .stats-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            background: #ffffffdd;
-            backdrop-filter: blur(4px);
-            border-radius: 2rem;
-            padding: 1rem 1.8rem;
-            border: 1px solid #d1fae5;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
-        }
-        .stat-card {
-            flex: 1;
-            min-width: 180px;
-            background: #fefce8;
-            border-radius: 1.5rem;
-            padding: 0.8rem 1rem;
-            text-align: center;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: 1px solid #fde047;
-        }
-        .stat-card:hover { transform: translateY(-3px); background: #fef9c3; }
-        .stat-name { font-weight: 800; font-size: 1.2rem; color: #1f6e43; }
-        .stat-count { font-size: 2rem; font-weight: 800; color: #0c4a2e; }
-        .stat-sub { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
-        .badge-team { display: inline-block; background: #e6f7ec; border-radius: 30px; padding: 0.2rem 0.8rem; font-size: 0.7rem; font-weight: 600; margin-top: 6px;}
-
-        .gallery-container {
-            max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 2rem 3rem 2rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-            gap: 2rem;
-        }
-
+        
         .card {
-            background: white;
-            border-radius: 1.6rem;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.2,0,0,1);
-            box-shadow: 0 10px 20px -8px rgba(0,0,0,0.08);
-            border: 1px solid #eef2ff;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .card:hover { transform: translateY(-6px); box-shadow: 0 24px 32px -12px rgba(0,0,0,0.15);}
-        .card-img {
-            width: 100%;
-            aspect-ratio: 9 / 16;
-            object-fit: cover;
-            background: #eef2f6;
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 25px 25px 50px -12px rgb(31 110 67 / 0.15);
         }
-        .card-content {
-            padding: 1rem 1.2rem 1.3rem;
+        
+        .modal {
+            animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .card-title {
-            font-weight: 700;
-            font-size: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 0.5rem;
+        
+        @keyframes modalPop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
-        .badge-type {
-            font-size: 0.65rem;
-            background: #eef2ff;
-            padding: 0.2rem 0.7rem;
-            border-radius: 30px;
-            font-weight: 600;
+        
+        .stat-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .btn-details {
-            background: #1f6e43;
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 0.6rem;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 0.7rem;
-            transition: 0.2s;
+        
+        .stat-card:hover {
+            transform: scale(1.05);
         }
-        .btn-details:hover { background: #0f5a37; transform: scale(0.98);}
-
-        /* DETAIL MODAL (full tech + assignment) */
-        .detail-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(20px);
-            z-index: 2000;
-            display: flex;
-            justify-content: center;
+        
+        .tech-tag {
+            display: inline-flex;
             align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.25s ease;
-        }
-        .detail-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .detail-container {
-            max-width: 1300px;
-            width: 92%;
-            max-height: 90vh;
-            background: white;
-            border-radius: 2rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            animation: slideUp 0.3s ease;
-        }
-        @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .detail-header {
-            display: flex;
-            justify-content: space-between;
-            padding: 1rem 2rem;
-            border-bottom: 2px solid #eef2ff;
-            background: white;
-            border-radius: 2rem 2rem 0 0;
-        }
-        .close-detail {
-            background: #eef2ff;
-            border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 60px;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        .close-detail:hover { background: #dc2626; color: white;}
-        .detail-body {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 2rem;
-            gap: 2rem;
-        }
-        .detail-image-area { flex: 1.2; min-width: 260px; }
-        .detail-image { width: 100%; max-height: 60vh; object-fit: contain; border-radius: 1.5rem; background: #f8fafc; }
-        .detail-info { flex: 1; background: #fefce8; padding: 1.5rem; border-radius: 1.5rem; }
-        .tech-badge { background: #1f6e43; color: white; padding: 0.2rem 1rem; border-radius: 30px; display: inline-block; font-size: 0.7rem; font-weight: bold; margin-bottom: 1rem; }
-        .assign-badge { background: #2c3e66; color: white; margin-left: 0.5rem; }
-        .footer-note { margin-top: 1.5rem; font-size: 0.8rem; border-top: 1px dashed #cbd5e1; padding-top: 1rem; color: #334155;}
-        .no-results { text-align: center; grid-column: 1/-1; padding: 3rem; background: #fff9e8; border-radius: 2rem;}
-
-        @media (max-width: 720px) {
-            .detail-body { flex-direction: column; }
+            gap: 4px;
+            background: #f1f5f9;
+            color: #1f6e43;
+            font-size: 0.75rem;
+            padding: 2px 10px;
+            border-radius: 9999px;
+            font-weight: 600;
         }
     </style>
 </head>
-<body>
-<div class="sticky-header">
-    <div class="header-container">
-        <div class="title-section">
-            <h1>🐪 ALMARBAT · DEV INTELLIGENCE SHOWCASE</h1>
-            <p style="font-size:0.85rem;">🔍 Each screen has full technical stack, team assignment (Inejih / Cheick Hama / Ahmetou) + frontend/backend libs</p>
+<body class="bg-slate-50">
+
+<!-- HEADER -->
+<header class="header-gradient text-white sticky top-0 z-50 shadow-xl">
+    <div class="max-w-screen-2xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <i class="fa-solid fa-camel text-4xl"></i>
+            <div>
+                <h1 class="text-3xl font-bold tracking-tighter">ALMARBAT</h1>
+                <p class="text-xs tracking-[2px] opacity-75 -mt-1">سوق الثروة الحيوانية</p>
+            </div>
         </div>
-        <div class="filter-bar" id="filterBar"></div>
+        <div class="text-center">
+            <h2 class="text-2xl font-bold">عرض كامل شاشات التطبيق</h2>
+            <p class="text-sm opacity-90">تقسيم العمل + التحليل التقني الكامل (Flutter • Next.js • Django)</p>
+        </div>
+        <div class="flex items-center gap-2 text-sm font-medium">
+            <span class="px-4 py-1.5 bg-white/20 rounded-3xl">Inejih Sid Mhamed</span>
+            <span class="px-4 py-1.5 bg-white/20 rounded-3xl">Cheick Hama</span>
+            <span class="px-4 py-1.5 bg-white/20 rounded-3xl">Ahmetou</span>
+        </div>
+    </div>
+</header>
+
+<!-- TEAM STATISTICS DASHBOARD -->
+<div class="max-w-screen-2xl mx-auto px-6 py-8">
+    <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+        <i class="fa-solid fa-chart-pie"></i>
+        تقسيم العمل بين الفريق
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="teamStats"></div>
+</div>
+
+<!-- FILTERS -->
+<div class="max-w-screen-2xl mx-auto px-6 pb-4 border-b">
+    <div class="flex flex-wrap gap-3" id="filterBar"></div>
+</div>
+
+<!-- GALLERY -->
+<div class="max-w-screen-2xl mx-auto px-6 py-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8" id="galleryGrid"></div>
+</div>
+
+<!-- TEAM FULL PAGE MODAL -->
+<div id="teamPageModal" class="hidden fixed inset-0 bg-black/90 z-[10000] flex items-center justify-center p-4 overflow-auto">
+    <div class="bg-white w-full max-w-7xl rounded-3xl overflow-hidden flex flex-col max-h-[95vh]">
+        <div class="px-8 py-6 border-b flex items-center justify-between bg-slate-50">
+            <h2 id="teamPageTitle" class="text-3xl font-bold"></h2>
+            <button onclick="closeTeamPage()" class="text-4xl text-slate-400 hover:text-red-600">✕</button>
+        </div>
+        <div class="flex-1 p-8 overflow-auto" id="teamPageContent"></div>
     </div>
 </div>
 
-<!-- Team Statistics Dashboard with clickable links -->
-<div class="team-dashboard" id="teamDashboard">
-    <div class="stats-grid" id="statsGrid"></div>
-</div>
-
-<div class="gallery-container">
-    <div class="grid" id="galleryGrid"></div>
-</div>
-
-<footer style="text-align:center; padding:2rem; border-top:1px solid #e2e8f0; color:#475569;">
-    <span>✨ Almarbat Ultimate Tech Hub — each screen analyzed: libraries, architecture, assignment. Click DETAILS for full breakdown ✨</span>
-</footer>
-
 <!-- DETAIL MODAL -->
-<div id="detailOverlay" class="detail-overlay">
-    <div class="detail-container">
-        <div class="detail-header">
-            <h2 id="detailTitle">Screen Intelligence</h2>
-            <button class="close-detail" id="closeDetailBtn">✕</button>
+<div id="detailModal" onclick="if(event.target.id==='detailModal')closeModal()" class="hidden fixed inset-0 bg-black/80 z-[9999] flex items-center justify-center p-4">
+    <div onclick="event.stopImmediatePropagation()" class="modal bg-white w-full max-w-5xl max-h-[92vh] overflow-hidden rounded-3xl shadow-2xl flex flex-col">
+        <div class="px-8 py-5 border-b flex items-center justify-between bg-slate-50">
+            <div class="flex items-center gap-4">
+                <div id="modalTypeBadge" class="px-5 py-1 text-xs font-bold rounded-3xl"></div>
+                <h2 id="modalTitle" class="text-2xl font-bold"></h2>
+            </div>
+            <div class="flex items-center gap-3">
+                <div id="modalAssignBadge" class="text-sm font-semibold px-6 py-2 rounded-3xl"></div>
+                <button onclick="closeModal()" class="w-10 h-10 flex items-center justify-center text-3xl text-slate-400 hover:text-red-500">✕</button>
+            </div>
         </div>
-        <div id="detailBody" class="detail-body"></div>
+        <div class="flex flex-1 overflow-hidden">
+            <div class="flex-1 bg-slate-950 p-6 flex items-center justify-center relative">
+                <img id="modalImage" class="max-h-full max-w-full object-contain rounded-2xl shadow-2xl border border-white/10" alt="">
+                <div onclick="document.getElementById('modalImage').requestFullscreen()" class="absolute bottom-8 right-8 bg-white/90 text-slate-800 text-xs font-bold px-5 py-2 rounded-3xl flex items-center gap-2 cursor-pointer hover:bg-white">
+                    <i class="fa-solid fa-expand"></i> عرض كامل الشاشة
+                </div>
+            </div>
+            <div class="w-2/5 bg-white p-8 overflow-y-auto">
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="uppercase text-xs tracking-widest font-bold text-slate-500 mb-3">التقنيات المستخدمة</h4>
+                        <div id="techStack" class="flex flex-wrap gap-2"></div>
+                    </div>
+                    <div>
+                        <h4 class="uppercase text-xs tracking-widest font-bold text-slate-500 mb-3">وصف الشاشة</h4>
+                        <p id="modalDesc" class="text-slate-700 leading-relaxed"></p>
+                    </div>
+                    <div>
+                        <h4 class="uppercase text-xs tracking-widest font-bold text-slate-500 mb-3">تدفق العمل (Frontend → Backend)</h4>
+                        <div id="flowDiagram" class="bg-slate-100 rounded-2xl p-4 text-sm font-medium"></div>
+                    </div>
+                    <div>
+                        <h4 class="uppercase text-xs tracking-widest font-bold text-slate-500 mb-3">المكتبات المستخدمة</h4>
+                        <div id="libraries" class="grid grid-cols-2 gap-3 text-sm"></div>
+                    </div>
+                    <button onclick="closeModal()" class="w-full bg-[#1f6e43] hover:bg-[#2b8c5e] text-white py-4 rounded-3xl text-lg font-semibold flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-check"></i> فهمت – أغلق التفاصيل
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
-    // ============================================================
-    // MASTER DATABASE: 51+ screens with full assignment & tech specs
-    // Each screen assigned to: "Inejih" (Livreur + all Web/Admin pages), 
-    // "Cheick Hama" and "Ahmetou" share the rest (acheteur/vendeur/preparateur)
-    // ============================================================
-    const screensMaster = [
-        // AUTH (acheteur type but shared between Cheick Hama & Ahmetou)
-        { src: "all users _screen loginscreen.jpeg", title: "Login Screen", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Phone/password auth. Uses JWT, React Hook Form + Zod validation. Axios calls to Django REST." },
-        { src: "all users _screen create acount  screen.jpeg", title: "Create Account", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Flutter frontend with Riverpod, Dio. Backend: Django SimpleJWT, OTP via Twilio." },
-        { src: "all users _screen reinitiales pasword screen.jpeg", title: "Reset Password", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "SMS OTP + Django PasswordReset token. Flutter secure storage." },
-        { src: "all users _screen otp  screen.jpeg", title: "OTP Verification", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "4/6-digit OTP, Redis cache, Django signals." },
-        // ACHEUTEUR 22 screens (majority Cheick Hama & Ahmetou)
-        { src: "achetuer_screen home screen.jpeg", title: "Home Marketplace", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Flutter + Riverpod, cached network images, infinite scroll, DjangoFilterBackend." },
-        { src: "achetuer_screen animal detiaels.jpeg", title: "Animal Details", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Next.js for web admin? Actually mobile: Flutter, shared widget, API: DRF." },
-        { src: "achetuer_screen filtering process screen.jpeg", title: "Filter No Results", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Flutter custom filters, provider pattern. Backend: django-filter." },
-        { src: "achetuer_screen filtering process2 screen.jpeg", title: "Advanced Filters", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Multi-criteria, debounced search, React Query if web." },
-        { src: "achetuer_screen paiment process screen.jpeg", title: "Choose Delivery", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Flutter Geolocator + Google Maps API, address repository." },
-        { src: "achetuer_screen paiment process screen2.jpeg", title: "Preparation Options", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "State management via Riverpod, storing prep choices." },
-        { src: "achetuer_screen paiment process screen3.jpeg", title: "Order Summary", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Flutter total calculation, order payload to Django." },
-        { src: "achetuer_screen paiment process screen4.jpeg", title: "Bankily Payment", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "QR code generation (qrcode.react / mobile_scanner), Bankily mock integration." },
-        { src: "achetuer_screen paiment process screen5.jpeg", title: "Payment Failed", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Retry logic, error tracking with Sentry." },
-        { src: "achetuer_screen paiment process screen6.jpeg", title: "Payment Success", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Webhook simulation, order confirmation event." },
-        { src: "achetuer_screen order_history screen.jpeg", title: "Order History", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Paginated list, Django REST pagination, Flutter listview." },
-        { src: "achetuer_screen profile screen.jpeg", title: "User Profile", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Flutter secure storage, update profile via Dio." },
-        { src: "achetuer_screen notification screen.jpeg", title: "Notifications", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Firebase Cloud Messaging + local notifications." },
-        { src: "achetuer_screen qr code scanning screen.jpeg", title: "QR Animal Scan", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Mobile_scanner + qr_code, verifies handoff stages." },
-        { src: "achetuer_screen group paying detields  screen.jpeg", title: "Group Buy Details", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "WebSocket for real-time group contributions, Django Channels." },
-        { src: "achetuer_screengroup buying process screen.jpeg", title: "Group Buy Process", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Collaborative purchase, share invites via WhatsApp." },
-        { src: "achetuer_screen animal preperaiton status  screen.jpeg", title: "Preparation Status", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Status polling, FCM push when ready." },
-        { src: "achetuer_screen splash screen.jpeg", title: "Splash Screen", type: "acheteur", assign: "Cheick Hama & Ahmetou", desc: "Flutter native splash + shared_preferences." },
-        // VENDEUR (5 screens) - also Cheick Hama & Ahmetou
-        { src: "veendeur_screen home screen.jpeg", title: "Seller Dashboard", type: "vendeur", assign: "Cheick Hama & Ahmetou", desc: "Charts using fl_chart, seller stats from Django." },
-        { src: "veendeur_screen adding animal process screen.jpeg", title: "Add Animal Step1", type: "vendeur", assign: "Cheick Hama & Ahmetou", desc: "Form wizard with image picker, Cloudinary upload." },
-        { src: "veendeur_screen adding animal process screen2.jpeg", title: "Add Animal Step2", type: "vendeur", assign: "Cheick Hama & Ahmetou", desc: "Django image upload, Pillow optimization." },
-        { src: "veendeur_screen adding animal process screen3.jpeg", title: "Add Animal Step3", type: "vendeur", assign: "Cheick Hama & Ahmetou", desc: "GPS location, map picker." },
-        { src: "veendeur_screen adding animal process screen4.jpeg", title: "Listing Published", type: "vendeur", assign: "Cheick Hama & Ahmetou", desc: "QR shareable link, listing goes to moderation queue." },
-        // PREPARATEUR (Butcher) - assigned to Cheick Hama & Ahmetou
-        { src: "preperation guy _screen home screen.jpeg", title: "Butcher Dashboard", type: "preparateur", assign: "Cheick Hama & Ahmetou", desc: "Real-time order updates via WebSocket, status buttons." },
-        { src: "preperation guy _screen preperationd orders order screen.jpeg", title: "Preparation Orders", type: "preparateur", assign: "Cheick Hama & Ahmetou", desc: "Task checklist, timer (provider)." },
-        { src: "preperation guy _screen preperationd etuields order screen.jpeg", title: "Preparation Details", type: "preparateur", assign: "Cheick Hama & Ahmetou", desc: "QR scan confirmation, driver handoff." },
-        // LIVREUR (4 screens) + ALL WEB ADMIN (13 screens) → Inejih exclusive
-        { src: "livruer_screen delivary ordering detials screen.jpeg", title: "Delivery Details", type: "livreur", assign: "Inejih", desc: "Flutter: Google Maps, route optimization, Dio, Geolocator." },
-        { src: "livruer_screen delivary ordering detials screen2.jpeg", title: "Delivery Tasks", type: "livreur", assign: "Inejih", desc: "List view with active/completed, FCM notifications for new tasks." },
-        { src: "livruer_screen map screen.jpeg", title: "Navigation Map", type: "livreur", assign: "Inejih", desc: "Turn-by-turn, OpenStreetMap / Google Maps integration." },
-        { src: "livruer_screen qr code screen.jpeg", title: "QR Verification", type: "livreur", assign: "Inejih", desc: "Scanner with torch, secure handshake with Django API." },
-        // ADMIN WEB UI (13 screens) – ALL for Inejih
-        { src: "admin_dashbaord web ui login page.jpeg", title: "Admin Login", type: "admin", assign: "Inejih", desc: "Next.js + Tailwind + ShadCN UI, JWT auth, Axios interceptors." },
-        { src: "admin_dashbaord web ui otp page.jpeg", title: "Admin OTP", type: "admin", assign: "Inejih", desc: "2FA with TOTP or SMS, react-query hooks." },
-        { src: "admin_dashbaord web ui dashabord page.jpeg", title: "Admin Dashboard", type: "admin", assign: "Inejih", desc: "Recharts graphs, TanStack Query for analytics, realtime data." },
-        { src: "admin_dashbaord web ui user managments page.jpeg", title: "Users Management", type: "admin", assign: "Inejih", desc: "Data table (ShadCN), sorting/filtering, Django Filter backend." },
-        { src: "admin_dashbaord web ui saller  managments page.jpeg", title: "Sellers Management", type: "admin", assign: "Inejih", desc: "Modals for verification, seller stats charts." },
-        { src: "admin_dashbaord web ui ssailelr listing approvments page.jpeg", title: "Listings Management", type: "admin", assign: "Inejih", desc: "Bulk actions, approval queue, React Hook Form." },
-        { src: "admin_dashbaord web ui order approvments page.jpeg", title: "Orders Management", type: "admin", assign: "Inejih", desc: "Real-time order updates, status change with optimistic updates." },
-        { src: "admin_dashbaord web ui paiements manegments page.jpeg", title: "Payments Management", type: "admin", assign: "Inejih", desc: "Transaction table, revenue chart, CSV export." },
-        { src: "admin_dashbaord web ui delivery manegments page.jpeg", title: "Drivers Management", type: "admin", assign: "Inejih", desc: "Live tracking using Leaflet, driver performance metrics." },
-        { src: "admin_dashbaord web ui animal preperation manegments page.jpeg", title: "Butchers Management", type: "admin", assign: "Inejih", desc: "Specialization filter, avg prep time analytics." },
-        { src: "admin_dashbaord web ui settings page.jpeg", title: "Platform Settings", type: "admin", assign: "Inejih", desc: "React Hook Form + Zod, settings stored in Django DB." },
-        // Additional admin screens to reach complete list (2 more from context)
-        { src: "admin_dashbaord web ui delivery manegments page.jpeg", title: "Fleet Analytics", type: "admin", assign: "Inejih", desc: "Map visualization, driver heatmap" },
-        { src: "admin_dashbaord web ui settings page.jpeg", title: "System Logs", type: "admin", assign: "Inejih", desc: "Audit logs, activity timeline" }
-    ];
+// ====================== ALL SCREENS DATA (Complete - no missing) ======================
+const screens = [
+    // AUTH
+    {id:1, src:"all users _screen loginscreen.jpeg", title:"Login Screen | شاشة تسجيل الدخول", type:"acheteur", assign:"Cheick Hama", desc:"شاشة تسجيل الدخول بالهاتف وكلمة المرور", tech:["Flutter"], libs:["Riverpod", "Dio"], flow:"Flutter → Django JWT"},
+    {id:2, src:"all users _screen create acount  screen.jpeg", title:"Create Account | إنشاء الحساب", type:"acheteur", assign:"Cheick Hama", desc:"إنشاء حساب جديد", tech:["Flutter"], libs:["Riverpod"], flow:"Flutter → Django User Creation"},
+    {id:3, src:"all users _screen reinitiales pasword screen.jpeg", title:"Reset Password | إعادة تعيين كلمة المرور", type:"acheteur", assign:"Cheick Hama", desc:"طلب إعادة تعيين كلمة المرور", tech:["Flutter"], libs:[], flow:"Flutter → Django Password Reset"},
+    {id:4, src:"all users _screen otp  screen.jpeg", title:"OTP Verification | التحقق برمز", type:"acheteur", assign:"Cheick Hama", desc:"إدخال رمز OTP", tech:["Flutter"], libs:[], flow:"Flutter → Redis OTP"},
+
+    // ACHEUTEUR (split between Cheick Hama and Ahmetou)
+    {id:5, src:"achetuer_screen home screen.jpeg", title:"Home Marketplace | السوق الرئيسي", type:"acheteur", assign:"Cheick Hama", desc:"الصفحة الرئيسية للسوق", tech:["Flutter","Riverpod"], libs:["cached_network_image"], flow:"Flutter → Django REST"},
+    {id:6, src:"achetuer_screen animal detiaels.jpeg", title:"Animal Details | تفاصيل الحيوان", type:"acheteur", assign:"Cheick Hama", desc:"تفاصيل الحيوان", tech:["Flutter"], libs:["Google Maps Flutter"], flow:"Flutter → DRF Serializer"},
+    {id:7, src:"achetuer_screen filtering process screen.jpeg", title:"Filter (No Results) | تصفية بدون نتائج", type:"acheteur", assign:"Ahmetou", desc:"حالة عدم وجود نتائج", tech:["Flutter"], libs:["django-filter"], flow:"Flutter → Django Filter"},
+    {id:8, src:"achetuer_screen filtering process2 screen.jpeg", title:"Advanced Filters | تصفية متقدمة", type:"acheteur", assign:"Ahmetou", desc:"التصفية المتقدمة", tech:["Flutter"], libs:["django-filter"], flow:"Flutter → Django Filter"},
+    {id:9, src:"achetuer_screen paiment process screen.jpeg", title:"Choose Delivery | اختيار التوصيل", type:"acheteur", assign:"Cheick Hama", desc:"اختيار موقع التوصيل", tech:["Flutter","Geolocator"], libs:["Google Maps Flutter"], flow:"Flutter → Django Geolocation"},
+    {id:10, src:"achetuer_screen paiment process screen2.jpeg", title:"Preparation Options | خيارات التحضير", type:"acheteur", assign:"Ahmetou", desc:"خيارات التحضير", tech:["Flutter","Riverpod"], libs:[], flow:"Local state"},
+    {id:11, src:"achetuer_screen paiment process screen3.jpeg", title:"Order Summary | ملخص الطلب", type:"acheteur", assign:"Cheick Hama", desc:"ملخص الطلب", tech:["Flutter"], libs:[], flow:"Flutter → DRF Order"},
+    {id:12, src:"achetuer_screen paiment process screen4.jpeg", title:"Bankily Payment | الدفع عبر بنكيلي", type:"acheteur", assign:"Ahmetou", desc:"الدفع عبر بنكيلي", tech:["Flutter"], libs:["qrcode.react"], flow:"Flutter → Bankily"},
+    {id:13, src:"achetuer_screen paiment process screen5.jpeg", title:"Payment Failed | فشل الدفع", type:"acheteur", assign:"Cheick Hama", desc:"فشل الدفع", tech:["Flutter"], libs:["Sentry"], flow:"Error handling"},
+    {id:14, src:"achetuer_screen paiment process screen6.jpeg", title:"Payment Success | نجاح الدفع", type:"acheteur", assign:"Ahmetou", desc:"نجاح الدفع", tech:["Flutter","Riverpod"], libs:["FCM"], flow:"Webhook → FCM"},
+    {id:15, src:"achetuer_screen order_history screen.jpeg", title:"Order History | سجل الطلبات", type:"acheteur", assign:"Cheick Hama", desc:"سجل الطلبات", tech:["Flutter"], libs:["Paginated ListView"], flow:"Flutter → DRF Pagination"},
+    {id:16, src:"achetuer_screen profile screen.jpeg", title:"User Profile | الملف الشخصي", type:"acheteur", assign:"Ahmetou", desc:"الملف الشخصي", tech:["Flutter","Flutter Secure Storage"], libs:[], flow:"Secure Storage → JWT"},
+    {id:17, src:"achetuer_screen notification screen.jpeg", title:"Notifications | الإشعارات", type:"acheteur", assign:"Cheick Hama", desc:"الإشعارات", tech:["Flutter"], libs:["Firebase Messaging"], flow:"FCM → Local Notifications"},
+    {id:18, src:"achetuer_screen qr code scanning screen.jpeg", title:"QR Animal Scan | مسح رمز الحيوان", type:"acheteur", assign:"Ahmetou", desc:"مسح رمز QR", tech:["Flutter"], libs:["mobile_scanner"], flow:"mobile_scanner → Django QR"},
+    {id:19, src:"achetuer_screen group paying detields  screen.jpeg", title:"Group Buy Details | تفاصيل الشراء الجماعي", type:"acheteur", assign:"Cheick Hama", desc:"تفاصيل الشراء الجماعي", tech:["Flutter","WebSocket"], libs:["Django Channels"], flow:"WebSocket real-time"},
+    {id:20, src:"achetuer_screengroup buying process screen.jpeg", title:"Group Buy Process | عملية الشراء الجماعي", type:"acheteur", assign:"Ahmetou", desc:"عملية الشراء الجماعي", tech:["Flutter","WebSocket"], libs:["Django Channels"], flow:"WebSocket"},
+    {id:21, src:"achetuer_screen animal preperaiton status  screen.jpeg", title:"Preparation Status | حالة التجهيز", type:"acheteur", assign:"Cheick Hama", desc:"حالة التجهيز", tech:["Flutter"], libs:["FCM"], flow:"Polling + FCM"},
+    {id:22, src:"achetuer_screen splash screen.jpeg", title:"Splash Screen | شاشة البداية", type:"acheteur", assign:"Ahmetou", desc:"شاشة البداية", tech:["Flutter"], libs:["flutter_native_splash"], flow:"Native splash"},
+
+    // VENDEUR
+    {id:23, src:"veendeur_screen home screen.jpeg", title:"Seller Dashboard | لوحة البائع", type:"vendeur", assign:"Cheick Hama", desc:"لوحة تحكم البائع", tech:["Flutter","fl_chart"], libs:["Django REST"], flow:"Seller stats"},
+    {id:24, src:"veendeur_screen adding animal process screen.jpeg", title:"Add Animal (Step 1) | إضافة حيوان 1", type:"vendeur", assign:"Ahmetou", desc:"إضافة حيوان - الخطوة 1", tech:["Flutter"], libs:["image_picker"], flow:"Form wizard"},
+    {id:25, src:"veendeur_screen adding animal process screen2.jpeg", title:"Add Animal (Step 2) | إضافة حيوان 2", type:"vendeur", assign:"Ahmetou", desc:"إضافة حيوان - الخطوة 2", tech:["Flutter"], libs:["Pillow"], flow:"Cloudinary upload"},
+    {id:26, src:"veendeur_screen adding animal process screen3.jpeg", title:"Add Animal (Step 3) | إضافة حيوان 3", type:"vendeur", assign:"Cheick Hama", desc:"إضافة حيوان - الخطوة 3", tech:["Flutter","Geolocator"], libs:["Cloudinary"], flow:"GPS + image upload"},
+    {id:27, src:"veendeur_screen adding animal process screen4.jpeg", title:"Listing Published | نشر الإعلان", type:"vendeur", assign:"Ahmetou", desc:"تم نشر الإعلان", tech:["Flutter"], libs:["qrcode.react"], flow:"Listing published"},
+
+    // PRÉPARATEUR
+    {id:28, src:"preperation guy _screen home screen.jpeg", title:"Butcher Dashboard | لوحة الجزار", type:"preparateur", assign:"Cheick Hama", desc:"لوحة الجزار", tech:["Flutter"], libs:["WebSocket"], flow:"Real-time orders"},
+    {id:29, src:"preperation guy _screen preperationd orders order screen.jpeg", title:"Preparation Orders | الطلبات للتجهيز", type:"preparateur", assign:"Ahmetou", desc:"الطلبات للتجهيز", tech:["Flutter"], libs:["Checklist UI"], flow:"Preparation status"},
+    {id:30, src:"preperation guy _screen preperationd etuields order screen.jpeg", title:"Preparation Details | تفاصيل التجهيز", type:"preparateur", assign:"Cheick Hama", desc:"تفاصيل التجهيز", tech:["Flutter"], libs:["mobile_scanner"], flow:"QR handshake"},
+
+    // LIVREUR - Inejih
+    {id:31, src:"livruer_screen delivary ordering detials screen.jpeg", title:"Delivery Details | تفاصيل التوصيل", type:"livreur", assign:"Inejih", desc:"تفاصيل التوصيل", tech:["Flutter"], libs:["Google Maps Flutter","Geolocator"], flow:"Flutter → Django Delivery API"},
+    {id:32, src:"livruer_screen delivary ordering detials screen2.jpeg", title:"Delivery Tasks | مهام التوصيل", type:"livreur", assign:"Inejih", desc:"مهام التوصيل", tech:["Flutter"], libs:["FCM"], flow:"Real-time tasks"},
+    {id:33, src:"livruer_screen map screen.jpeg", title:"Navigation Map | خريطة الملاحة", type:"livreur", assign:"Inejih", desc:"خريطة الملاحة", tech:["Flutter"], libs:["Google Maps Flutter"], flow:"Turn-by-turn"},
+    {id:34, src:"livruer_screen qr code screen.jpeg", title:"QR Verification | مسح QR للتسليم", type:"livreur", assign:"Inejih", desc:"مسح QR", tech:["Flutter"], libs:["mobile_scanner"], flow:"Secure QR verification"},
+
+    // ADMIN WEB - Inejih
+    {id:35, src:"admin_dashbaord web ui login page.jpeg", title:"Admin Login | تسجيل الدخول للمشرف", type:"admin", assign:"Inejih", desc:"تسجيل دخول المشرف", tech:["Next.js","Tailwind","ShadCN"], libs:["NextAuth","Zod"], flow:"Next.js → Django JWT"},
+    {id:36, src:"admin_dashbaord web ui otp page.jpeg", title:"Admin OTP Verification | التحقق برمز المشرف", type:"admin", assign:"Inejih", desc:"OTP المشرف", tech:["Next.js"], libs:["react-query"], flow:"OTP via Redis"},
+    {id:37, src:"admin_dashbaord web ui dashabord page.jpeg", title:"Admin Dashboard | لوحة تحكم المشرف", type:"admin", assign:"Inejih", desc:"لوحة التحكم الرئيسية", tech:["Next.js","Recharts","TanStack Query"], libs:["ShadCN"], flow:"Real-time analytics"},
+    {id:38, src:"admin_dashbaord web ui user managments page.jpeg", title:"Users Management | إدارة المستخدمين", type:"admin", assign:"Inejih", desc:"إدارة المستخدمين", tech:["Next.js","TanStack Table"], libs:["ShadCN"], flow:"User management"},
+    {id:39, src:"admin_dashbaord web ui saller  managments page.jpeg", title:"Sellers Management | إدارة البائعين", type:"admin", assign:"Inejih", desc:"إدارة البائعين", tech:["Next.js"], libs:["Recharts"], flow:"Seller verification"},
+    {id:40, src:"admin_dashbaord web ui ssailelr listing approvments page.jpeg", title:"Listings Management | إدارة القوائم", type:"admin", assign:"Inejih", desc:"إدارة الإعلانات", tech:["Next.js"], libs:["Bulk actions"], flow:"Moderation"},
+    {id:41, src:"admin_dashbaord web ui order approvments page.jpeg", title:"Orders Management | إدارة الطلبات", type:"admin", assign:"Inejih", desc:"إدارة الطلبات", tech:["Next.js","TanStack Query"], libs:["ShadCN"], flow:"Order management"},
+    {id:42, src:"admin_dashbaord web ui paiements manegments page.jpeg", title:"Payments Management | إدارة المدفوعات", type:"admin", assign:"Inejih", desc:"إدارة المدفوعات", tech:["Next.js","Recharts"], libs:["CSV Export"], flow:"Payment tracking"},
+    {id:43, src:"admin_dashbaord web ui delivery manegments page.jpeg", title:"Drivers Management | إدارة السائقين", type:"admin", assign:"Inejih", desc:"إدارة السائقين", tech:["Next.js","Leaflet"], libs:["Live tracking"], flow:"Fleet management"},
+    {id:44, src:"admin_dashbaord web ui animal preperation manegments page.jpeg", title:"Butchers Management | إدارة الجزارين", type:"admin", assign:"Inejih", desc:"إدارة الجزارين", tech:["Next.js"], libs:["Charts"], flow:"Preparation centers"},
+    {id:45, src:"admin_dashbaord web ui settings page.jpeg", title:"Platform Settings | إعدادات المنصة", type:"admin", assign:"Inejih", desc:"إعدادات المنصة", tech:["Next.js","React Hook Form + Zod"], libs:["ShadCN"], flow:"Platform settings"}
+];
+
+// ====================== TEAM COUNTS ======================
+const teamCounts = {
+    "Inejih": screens.filter(s => s.assign === "Inejih").length,
+    "Cheick Hama": screens.filter(s => s.assign === "Cheick Hama").length,
+    "Ahmetou": screens.filter(s => s.assign === "Ahmetou").length
+};
+
+// ====================== RENDER TEAM STATS ======================
+function renderTeamStats() {
+    const container = document.getElementById("teamStats");
+    container.innerHTML = `
+        <div onclick="showTeamPage('Inejih')" class="stat-card cursor-pointer bg-white border border-[#1f6e43] rounded-3xl p-6 flex flex-col items-center shadow-md">
+            <div class="text-5xl mb-2">🧑‍💻</div>
+            <h4 class="text-xl font-bold">Inejih Sid Mhamed</h4>
+            <p class="text-4xl font-bold text-[#1f6e43]">${teamCounts["Inejih"]}</p>
+            <p class="text-sm text-slate-500">Livreur + All Admin Web</p>
+        </div>
+        
+        <div onclick="showTeamPage('Cheick Hama')" class="stat-card cursor-pointer bg-white border rounded-3xl p-6 flex flex-col items-center shadow-md">
+            <div class="text-5xl mb-2">👳‍♂️</div>
+            <h4 class="text-xl font-bold">Cheick Hama</h4>
+            <p class="text-4xl font-bold text-[#1f6e43]">${teamCounts["Cheick Hama"]}</p>
+            <p class="text-sm text-slate-500">Acheteur + Vendeur + Préparateur</p>
+        </div>
+        
+        <div onclick="showTeamPage('Ahmetou')" class="stat-card cursor-pointer bg-white border rounded-3xl p-6 flex flex-col items-center shadow-md">
+            <div class="text-5xl mb-2">🧔</div>
+            <h4 class="text-xl font-bold">Ahmetou</h4>
+            <p class="text-4xl font-bold text-[#1f6e43]">${teamCounts["Ahmetou"]}</p>
+            <p class="text-sm text-slate-500">Acheteur + Vendeur + Préparateur</p>
+        </div>
+    `;
+}
+
+// ====================== SHOW TEAM FULL PAGE ======================
+function showTeamPage(person) {
+    const filtered = screens.filter(s => s.assign === person);
+    let html = `<h3 class="text-3xl font-bold mb-8">${person} - شاشاته (${filtered.length} شاشة)</h3>`;
+    html += `<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">`;
     
-    // Deduplicate by src (keep unique)
-    const uniqueMap = new Map();
-    screensMaster.forEach(s => { if(s.src && !uniqueMap.has(s.src)) uniqueMap.set(s.src, s); });
-    const finalScreens = Array.from(uniqueMap.values());
-    
-    // team stats assignment counts
-    const stats = { Inejih: 0, "Cheick Hama & Ahmetou": 0 };
-    finalScreens.forEach(s => {
-        if(s.assign === "Inejih") stats.Inejih++;
-        else stats["Cheick Hama & Ahmetou"]++;
+    filtered.forEach(screen => {
+        html += `
+            <div class="card bg-white rounded-3xl overflow-hidden shadow-lg cursor-pointer" onclick="showDetail(${screen.id}); closeTeamPage();">
+                <img src="${screen.src}" class="w-full aspect-[9/16] object-cover">
+                <div class="p-4">
+                    <h5 class="font-bold">${screen.title}</h5>
+                    <p class="text-xs text-slate-500 mt-1">${screen.desc}</p>
+                </div>
+            </div>
+        `;
     });
+    html += `</div>`;
     
-    let activeFilter = "tous";
-    const filterCategories = [
-        { id: "tous", label: "🌟 ALL SCREENS" },
-        { id: "acheteur", label: "🛍️ BUYER" },
-        { id: "vendeur", label: "🌾 SELLER" },
-        { id: "livreur", label: "🚚 DELIVERY" },
-        { id: "preparateur", label: "🔪 BUTCHER" },
-        { id: "admin", label: "⚙️ ADMIN WEB" }
-    ];
-    
-    function renderFilters() {
-        const bar = document.getElementById('filterBar');
-        bar.innerHTML = '';
-        filterCategories.forEach(cat => {
-            const btn = document.createElement('button');
-            btn.className = `filter-btn ${activeFilter === cat.id ? 'active' : ''}`;
-            btn.textContent = cat.label;
-            btn.onclick = () => { activeFilter = cat.id; renderFilters(); renderGallery(); };
-            bar.appendChild(btn);
-        });
+    document.getElementById("teamPageTitle").innerHTML = person;
+    document.getElementById("teamPageContent").innerHTML = html;
+    document.getElementById("teamPageModal").classList.remove("hidden");
+}
+
+function closeTeamPage() {
+    document.getElementById("teamPageModal").classList.add("hidden");
+}
+
+// ====================== FILTERS & GALLERY ======================
+let currentFilter = "all";
+
+function renderFilters() {
+    const types = ["all","acheteur","vendeur","preparateur","livreur","admin"];
+    const labels = ["🌍 الكل","🛍️ Acheteur","🌾 Vendeur","🔪 Préparateur","🚚 Livreur","⚙️ Admin Web"];
+    const bar = document.getElementById("filterBar");
+    bar.innerHTML = types.map((type,i) => `
+        <button onclick="setFilter('${type}')" 
+                class="px-6 py-3 text-sm font-medium rounded-3xl ${currentFilter===type?'bg-[#1f6e43] text-white shadow-inner':'bg-white border hover:bg-slate-100'}">
+            ${labels[i]}
+        </button>
+    `).join("");
+}
+
+function setFilter(f) {
+    currentFilter = f;
+    renderFilters();
+    renderGallery();
+}
+
+function filterByTeam(team) {
+    currentFilter = team;
+    renderFilters();
+    renderGallery();
+}
+
+function renderGallery() {
+    let filtered = screens;
+    if (currentFilter !== "all") {
+        if (currentFilter === "Inejih") filtered = screens.filter(s => s.assign === "Inejih");
+        else if (currentFilter === "Cheick Hama") filtered = screens.filter(s => s.assign === "Cheick Hama");
+        else if (currentFilter === "Ahmetou") filtered = screens.filter(s => s.assign === "Ahmetou");
+        else filtered = screens.filter(s => s.type === currentFilter);
     }
     
-    // team stats dashboard with links
-    function renderTeamStats() {
-        const container = document.getElementById('statsGrid');
-        container.innerHTML = `
-            <div class="stat-card" data-team="inejih">
-                <div class="stat-name">🧑‍💻 Inejih Sid Mhamed</div>
-                <div class="stat-count">${stats.Inejih}</div>
-                <div class="stat-sub">screens assigned</div>
-                <div class="badge-team">Livreur + All Web Admin (13)</div>
-            </div>
-            <div class="stat-card" data-team="cheick-ahmetou">
-                <div class="stat-name">👥 Cheick Hama & Ahmetou</div>
-                <div class="stat-count">${stats["Cheick Hama & Ahmetou"]}</div>
-                <div class="stat-sub">screens assigned</div>
-                <div class="badge-team">Acheteur · Vendeur · Préparateur</div>
-            </div>
-        `;
-        // add click filter by team assignment (extra feature)
-        document.querySelectorAll('.stat-card').forEach((card, idx) => {
-            card.addEventListener('click', () => {
-                const team = idx === 0 ? "Inejih" : "Cheick Hama & Ahmetou";
-                const filteredByTeam = finalScreens.filter(s => s.assign === team);
-                if(filteredByTeam.length) {
-                    alert(`🔍 ${team} → ${filteredByTeam.length} screens. Click on any screen for details.`);
-                }
-            });
-        });
-    }
-    
-    function escapeHtml(str) { return str?.replace(/[&<>]/g, function(m){ return m==='&'?'&amp;':m==='<'?'&lt;':m==='>'?'&gt;':m;}) || ''; }
-    
-    // DETAIL MODAL with full tech stack & backend/frontend libraries
-    function showDetail(screen) {
-        const detailContainer = document.getElementById('detailBody');
-        document.getElementById('detailTitle').innerText = `${screen.title} | ${screen.assign}`;
-        const techStack = `
-            <div class="detail-image-area">
-                <img class="detail-image" src="${screen.src}" alt="${screen.title}" onerror="this.src='https://placehold.co/600x1000?text=ALMARBAT+Preview'">
-            </div>
-            <div class="detail-info">
-                <span class="tech-badge">🎯 ${screen.type.toUpperCase()} INTERFACE</span>
-                <span class="tech-badge assign-badge">👥 Assigned: ${screen.assign}</span>
-                <h2 style="margin: 0.8rem 0;">${escapeHtml(screen.title)}</h2>
-                <div class="footer-note" style="background:#f1f5f9; padding:0.8rem; border-radius:1rem;">
-                    <strong>📱 Frontend Libraries:</strong><br>
-                    ${screen.assign === "Inejih" ? "Next.js, React Query, Axios, ShadCN UI, Tailwind, Recharts, Leaflet, react-qr-reader" : "Flutter, Riverpod, Dio, GoRouter, cached_network_image, google_maps_flutter, mobile_scanner, flutter_local_notifications"}<br><br>
-                    <strong>⚙️ Backend & APIs:</strong><br>
-                    Django REST Framework, Simple JWT, Django Filter, PostgreSQL, Redis (caching), Celery (background tasks), Cloudinary storage, Firebase Cloud Messaging<br><br>
-                    <strong>🔧 Functionality & Flow:</strong><br>
-                    ${screen.desc}
+    const grid = document.getElementById("galleryGrid");
+    grid.innerHTML = filtered.map(screen => `
+        <div class="card bg-white rounded-3xl overflow-hidden shadow-lg cursor-pointer group" onclick="showDetail(${screen.id})">
+            <div class="relative">
+                <img src="${screen.src}" class="w-full aspect-[9/16] object-cover group-hover:scale-105" alt="${screen.title}">
+                <div class="absolute top-3 left-3 px-3 py-1 text-xs font-bold bg-white/90 text-[#1f6e43] rounded-3xl">
+                    ${screen.type.toUpperCase()}
                 </div>
-                <hr style="margin: 1rem 0;">
-                <div><strong>📐 Architecture:</strong> Web (Next.js) + Mobile (Flutter) ↔ Django REST API ↔ PostgreSQL. Real-time via WebSockets / FCM.</div>
-                <div style="margin-top:1rem;"><strong>🔐 Security:</strong> JWT, OTP verification, QR handshake, HTTPS enforced.</div>
-                <button class="btn-details" id="closeDetailBtnInside" style="margin-top:1.5rem;">✖ Close Preview</button>
             </div>
-        `;
-        detailContainer.innerHTML = techStack;
-        document.getElementById('detailOverlay').classList.add('active');
-        document.body.style.overflow = 'hidden';
-        const insideClose = document.getElementById('closeDetailBtnInside');
-        if(insideClose) insideClose.addEventListener('click', closeDetail);
-    }
-    
-    function closeDetail() {
-        document.getElementById('detailOverlay').classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    
-    function renderGallery() {
-        let filtered = finalScreens;
-        if(activeFilter !== "tous") filtered = finalScreens.filter(s => s.type === activeFilter);
-        const grid = document.getElementById('galleryGrid');
-        if(filtered.length === 0) { grid.innerHTML = `<div class="no-results">✨ No screens for this filter ✨</div>`; return; }
-        let html = '';
-        filtered.forEach((screen, idx) => {
-            let typeLabel = '';
-            if(screen.type === 'acheteur') typeLabel = 'Acheteur';
-            else if(screen.type === 'vendeur') typeLabel = 'Vendeur';
-            else if(screen.type === 'livreur') typeLabel = 'Livreur';
-            else if(screen.type === 'preparateur') typeLabel = 'Préparateur';
-            else if(screen.type === 'admin') typeLabel = 'Admin Web';
-            html += `
-                <div class="card">
-                    <img class="card-img" src="${screen.src}" alt="${screen.title}" loading="lazy" onerror="this.src='https://placehold.co/500x800?text=ALMARBAT'">
-                    <div class="card-content">
-                        <div class="card-title">
-                            <span>${escapeHtml(screen.title)}</span>
-                            <span class="badge-type">${typeLabel}</span>
-                        </div>
-                        <div style="font-size:0.7rem; color:#4b5563;">👥 ${screen.assign}</div>
-                        <button class="btn-details" data-idx="${idx}">🔍 DETAILS · TECH & ASSIGN</button>
-                    </div>
+            <div class="p-4">
+                <h5 class="font-bold text-base leading-tight mb-1">${screen.title}</h5>
+                <div class="flex justify-between items-center text-xs">
+                    <span class="text-emerald-700 font-medium">${screen.assign}</span>
+                    <button onclick="event.stopImmediatePropagation();showDetail(${screen.id});" 
+                            class="text-white bg-[#1f6e43] px-5 py-1 text-xs rounded-3xl flex items-center gap-1">
+                        <i class="fa-solid fa-circle-info"></i> تفاصيل
+                    </button>
                 </div>
-            `;
-        });
-        grid.innerHTML = html;
-        document.querySelectorAll('.btn-details').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const idx = parseInt(btn.getAttribute('data-idx'));
-                const scr = filtered[idx];
-                if(scr) showDetail(scr);
-            });
-        });
-        // reveal animation
-        setTimeout(() => {
-            document.querySelectorAll('.card').forEach(c => c.style.opacity = '1', c.style.transform = 'translateY(0)');
-        }, 80);
-    }
+            </div>
+        </div>
+    `).join("");
+}
+
+// ====================== DETAIL MODAL ======================
+function showDetail(id) {
+    const screen = screens.find(s => s.id === id);
+    if (!screen) return;
     
-    document.getElementById('closeDetailBtn').addEventListener('click', closeDetail);
-    document.getElementById('detailOverlay').addEventListener('click', (e) => { if(e.target === document.getElementById('detailOverlay')) closeDetail(); });
-    document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && document.getElementById('detailOverlay').classList.contains('active')) closeDetail(); });
+    document.getElementById("modalTitle").innerHTML = screen.title;
+    document.getElementById("modalImage").src = screen.src;
+    document.getElementById("modalTypeBadge").innerHTML = `<i class="fa-solid fa-mobile-screen-button"></i> ${screen.type.toUpperCase()}`;
+    document.getElementById("modalAssignBadge").innerHTML = `👤 ${screen.assign}`;
+    document.getElementById("modalDesc").innerHTML = screen.desc;
     
-    function init() {
-        renderFilters();
-        renderTeamStats();
-        renderGallery();
-    }
-    init();
+    const techHTML = screen.tech.map(t => `<span class="tech-tag"><i class="fa-solid fa-code"></i> ${t}</span>`).join("");
+    document.getElementById("techStack").innerHTML = techHTML;
+    
+    const libHTML = screen.libs.length 
+        ? screen.libs.map(l => `<div class="bg-slate-100 text-slate-700 rounded-2xl px-4 py-2 text-xs flex items-center gap-2"><i class="fa-solid fa-cube"></i> ${l}</div>`).join("")
+        : `<div class="text-slate-400 text-sm">لا توجد مكتبات إضافية مطلوبة</div>`;
+    document.getElementById("libraries").innerHTML = libHTML;
+    
+    document.getElementById("flowDiagram").innerHTML = `
+        <div class="flex items-center justify-center gap-3 text-center">
+            <div class="bg-white px-6 py-3 rounded-2xl shadow-inner">Frontend<br><span class="text-[#1f6e43] font-bold">${screen.tech[0] || 'Flutter / Next.js'}</span></div>
+            <i class="fa-solid fa-arrow-right text-3xl text-slate-300"></i>
+            <div class="bg-white px-6 py-3 rounded-2xl shadow-inner">API<br><span class="text-[#1f6e43] font-bold">Django REST</span></div>
+            <i class="fa-solid fa-arrow-right text-3xl text-slate-300"></i>
+            <div class="bg-white px-6 py-3 rounded-2xl shadow-inner">Database<br><span class="text-[#1f6e43] font-bold">PostgreSQL</span></div>
+        </div>
+    `;
+    
+    document.getElementById("detailModal").classList.remove("hidden");
+    document.getElementById("detailModal").classList.add("flex");
+}
+
+function closeModal() {
+    const modal = document.getElementById("detailModal");
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+}
+
+// ====================== INIT ======================
+function init() {
+    renderTeamStats();
+    renderFilters();
+    renderGallery();
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape") {
+            closeModal();
+            document.getElementById("teamPageModal").classList.add("hidden");
+        }
+    });
+}
+
+window.onload = init;
 </script>
 </body>
 </html>
