@@ -36,10 +36,10 @@
         </div>
         <div class="text-center">
             <div class="bg-white/20 backdrop-blur-sm rounded-full px-5 py-1 text-sm font-bold">🏗️ الهندسة المعمارية للمشروع</div>
-            <p class="text-xs mt-1 font-mono">Inejih • Cheick Hama • Ahmetou | توزيع دقيق 15 شاشة لكل مطور</p>
+            <p class="text-xs mt-1 font-mono">Inejih • Cheick Hama • Ahmetou | توزيع دقيق (64 شاشة)</p>
         </div>
         <div class="flex gap-2 text-sm font-bold">
-            <span class="bg-black/30 px-4 py-1 rounded-full"><i class="fa-regular fa-clock"></i> 45 شاشة | 7 مراحل</span>
+            <span class="bg-black/30 px-4 py-1 rounded-full"><i class="fa-regular fa-clock"></i> 64 شاشة | 7 مراحل</span>
         </div>
     </div>
 </div>
@@ -100,175 +100,280 @@
 
 <script>
     // ===================== العمارة الاحترافية: 7 مراحل متقدمة =====================
-    // Phase 0: Foundation & Onboarding
-    // Phase 1: Authentication & Security Layer
-    // Phase 2: Core Marketplace (Acheteur)
-    // Phase 3: Seller & Inventory Management (Vendeur)
-    // Phase 4: Preparation & Butcher Workflow (Préparateur)
-    // Phase 5: Delivery & Logistics (Livreur)
-    // Phase 6: Admin Dashboard & Analytics (Full Web)
-    
-    // 45 شاشة مقسمة بدقة على 7 مراحل مع توزيع Inejih (15), Cheick Hama (15), Ahmetou (15)
-    const screensDB = [
-        // ========== PHASE 0: FOUNDATION & ONBOARDING (6 شاشات) ==========
-        { id:1, src:"splash_screen.jpeg", title:"Splash Screen", phase:"phase0", type:"foundation", assign:"Cheick Hama", desc:"شاشة البداية مع تهيئة البيئة والتحقق من التوكن", tech:["Flutter","Native Splash"], libs:["flutter_native_splash","shared_preferences"], flow:"التحقق من التوكن المخزن → توجيه إلى Onboarding أو Auth" },
-        { id:2, src:"onboarding1.jpeg", title:"Onboarding التعليمي 1", phase:"phase0", type:"onboarding", assign:"Ahmetou", desc:"تقديم فكرة السوق الحيواني", tech:["Flutter"], libs:["smooth_page_indicator","lottie"], flow:"عرض شرائح تعليمية → تخزين حالة الانتهاء" },
-        { id:3, src:"onboarding2.jpeg", title:"Onboarding الشراء الجماعي", phase:"phase0", type:"onboarding", assign:"Ahmetou", desc:"شرح ميزة الشراء الجماعي", tech:["Flutter"], libs:[], flow:"إنهاء Onboarding → تخزين SharedPreferences" },
-        { id:4, src:"onboarding3.jpeg", title:"Onboarding التوصيل", phase:"phase0", type:"onboarding", assign:"Ahmetou", desc:"طريقة عمل التوصيل", tech:["Flutter"], libs:[], flow:"توجيه إلى شاشة تسجيل الدخول" },
-        { id:5, src:"choose_language.jpeg", title:"اختيار اللغة", phase:"phase0", type:"foundation", assign:"Cheick Hama", desc:"دعم العربية والفرنسية", tech:["Flutter","EasyLocalization"], libs:["easy_localization"], flow:"تخزين اللغة المفضلة" },
-        { id:6, src:"permissions_screen.jpeg", title:"أذونات التطبيق", phase:"phase0", type:"foundation", assign:"Cheick Hama", desc:"طلب أذونات الموقع والكاميرا", tech:["Flutter"], libs:["permission_handler"], flow:"إدارة الأذونات الديناميكية" },
-        
-        // ========== PHASE 1: AUTHENTICATION & SECURITY LAYER (6 شاشات) ==========
-        { id:7, src:"all users _screen loginscreen.jpeg", title:"تسجيل الدخول المتقدم", phase:"phase1", type:"auth", assign:"Ahmetou", desc:"دخول باستخدام JWT + biometric", tech:["Flutter","Django","JWT"], libs:["local_auth","dio","riverpod"], flow:"POST /api/auth/login → تخزين Refresh Token في Secure Storage" },
-        { id:8, src:"all users _screen create acount  screen.jpeg", title:"إنشاء حساب متعدد الأدوار", phase:"phase1", type:"auth", assign:"Cheick Hama", desc:"تسجيل Acheteur أو Vendeur", tech:["Flutter","Django"], libs:["image_picker"], flow:"POST /api/auth/register → إرسال OTP" },
-        { id:9, src:"all users _screen otp  screen.jpeg", title:"OTP Verification", phase:"phase1", type:"auth", assign:"Ahmetou", desc:"التحقق برمز SMS", tech:["Flutter","Redis","Twilio"], libs:["pinput"], flow:"POST /api/auth/verify-otp → تفعيل الحساب" },
-        { id:10, src:"all users _screen reinitiales pasword screen.jpeg", title:"استعادة كلمة المرور", phase:"phase1", type:"auth", assign:"Cheick Hama", desc:"إعادة تعيين عبر البريد", tech:["Flutter","Django"], libs:["emailjs"], flow:"POST /api/auth/password-reset → رابط آمن" },
-        { id:11, src:"biometric_login.jpeg", title:"Biometric Login", phase:"phase1", type:"auth", assign:"Ahmetou", desc:"دخول بالبصمة أو FaceID", tech:["Flutter"], libs:["local_auth"], flow:"مصادقة محلية → تجديد التوكن" },
-        { id:12, src:"2fa_setup.jpeg", title:"تفعيل 2FA", phase:"phase1", type:"auth", assign:"Cheick Hama", desc:"إعداد المصادقة الثنائية", tech:["Flutter"], libs:["qr_flutter"], flow:"POST /api/auth/2fa/enable → مسح QR" },
-        
-        // ========== PHASE 2: CORE MARKETPLACE (ACHEUTEUR) (12 شاشة) ==========
-        { id:13, src:"achetuer_screen home screen.jpeg", title:"السوق الذكي", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"قائمة الحيوانات مع خوارزميات توصية", tech:["Flutter","Django","Elasticsearch"], libs:["cached_network_image"], flow:"GET /api/marketplace?recommendations=true" },
-        { id:14, src:"achetuer_screen animal detiaels.jpeg", title:"تفاصيل الحيوان", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"عرض كامل + خريطة المزرعة", tech:["Flutter","Google Maps"], libs:["google_maps_flutter"], flow:"GET /api/animals/{id} + geolocation" },
-        { id:15, src:"achetuer_screen filtering process screen.jpeg", title:"فلتر احترافي", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"فلتر متعدد المعايير", tech:["Flutter"], libs:["django-filter"], flow:"GET /api/animals/filter?price&breed" },
-        { id:16, src:"achetuer_screen filtering process2 screen.jpeg", title:"نتائج الفلتر", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"عرض النتائج المفلترة", tech:["Flutter"], libs:["infinite_scroll"], flow:"تحميل متقطع" },
-        { id:17, src:"achetuer_screen paiment process screen.jpeg", title:"اختيار التوصيل", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"تحديد العنوان والخدمة", tech:["Flutter","Geolocator"], libs:["google_maps_flutter"], flow:"تحديد الموقع → حساب التكلفة" },
-        { id:18, src:"achetuer_screen paiment process screen2.jpeg", title:"خيارات التحضير", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"تخصيص الذبح والتقطيع", tech:["Flutter"], libs:[], flow:"تحديد الخيارات → تحديث السلة" },
-        { id:19, src:"achetuer_screen paiment process screen3.jpeg", title:"ملخص الطلب", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"مراجعة الطلب النهائي", tech:["Flutter"], libs:["intl"], flow:"POST /api/orders/create → استدعاء الدفع" },
-        { id:20, src:"achetuer_screen paiment process screen4.jpeg", title:"بوابة الدفع (Bankily)", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"تكامل بنكيلي", tech:["Flutter","WebView"], libs:["webview_flutter"], flow:"توجيه إلى بوابة Bankily → Webhook" },
-        { id:21, src:"achetuer_screen paiment process screen5.jpeg", title:"فشل الدفع", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"معالجة الخطأ", tech:["Flutter"], libs:["sentry"], flow:"إعادة المحاولة أو تغيير طريقة الدفع" },
-        { id:22, src:"achetuer_screen paiment process screen6.jpeg", title:"نجاح الدفع", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"تأكيد الطلب", tech:["Flutter","FCM"], libs:["firebase_messaging"], flow:"إشعار فوري → تحديث حالة الطلب" },
-        { id:23, src:"achetuer_screen order_history screen.jpeg", title:"سجل الطلبات", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"عرض تاريخ الطلبات", tech:["Flutter"], libs:["pagination"], flow:"GET /api/orders/history" },
-        { id:24, src:"achetuer_screen group paying detields  screen.jpeg", title:"الشراء الجماعي", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"إنشاء مجموعة شراء", tech:["Flutter","WebSocket"], libs:["django_channels"], flow:"WebSocket للمشاركة الفورية" },
-        
-        // ========== PHASE 3: SELLER & INVENTORY (VENDEUR) (7 شاشات) ==========
-        { id:25, src:"veendeur_screen home screen.jpeg", title:"لوحة البائع", phase:"phase3", type:"vendeur", assign:"Ahmetou", desc:"إحصائيات المبيعات", tech:["Flutter","fl_chart"], libs:["syncfusion_flutter_charts"], flow:"GET /api/seller/dashboard" },
-        { id:26, src:"veendeur_screen adding animal process screen.jpeg", title:"إضافة حيوان - الخطوة 1", phase:"phase3", type:"vendeur", assign:"Cheick Hama", desc:"بيانات الحيوان", tech:["Flutter"], libs:["form_builder"], flow:"نموذج متعدد الخطوات" },
-        { id:27, src:"veendeur_screen adding animal process screen2.jpeg", title:"رفع الصور والفيديو", phase:"phase3", type:"vendeur", assign:"Ahmetou", desc:"رفع وسائط متعددة", tech:["Flutter","Cloudinary"], libs:["image_picker","dio"], flow:"رفع إلى Cloudinary → رابط CDN" },
-        { id:28, src:"veendeur_screen adding animal process screen3.jpeg", title:"تحديد الموقع", phase:"phase3", type:"vendeur", assign:"Cheick Hama", desc:"GPS للمزرعة", tech:["Flutter","Geolocator"], libs:[], flow:"تحديد إحداثيات المزرعة" },
-        { id:29, src:"veendeur_screen adding animal process screen4.jpeg", title:"نشر الإعلان", phase:"phase3", type:"vendeur", assign:"Ahmetou", desc:"نشر الحيوان", tech:["Flutter"], libs:[], flow:"POST /api/animals → إنشاء QR" },
-        { id:30, src:"veendeur_screen inventory.jpeg", title:"إدارة المخزون", phase:"phase3", type:"vendeur", assign:"Cheick Hama", desc:"قائمة الحيوانات", tech:["Flutter"], libs:["swipe_to_delete"], flow:"GET/PATCH /api/seller/animals" },
-        { id:31, src:"veendeur_screen sales_analytics.jpeg", title:"تحليل المبيعات", phase:"phase3", type:"vendeur", assign:"Ahmetou", desc:"إحصائيات متقدمة", tech:["Flutter","Recharts"], libs:["fl_chart"], flow:"GET /api/seller/analytics" },
-        
-        // ========== PHASE 4: PREPARATION & BUTCHER WORKFLOW (5 شاشات) ==========
-        { id:32, src:"preperation guy _screen home screen.jpeg", title:"لوحة الجزار", phase:"phase4", type:"preparateur", assign:"Cheick Hama", desc:"قائمة الطلبات للتجهيز", tech:["Flutter","WebSocket"], libs:["django_channels"], flow:"WebSocket real-time orders" },
-        { id:33, src:"preperation guy _screen preperationd orders order screen.jpeg", title:"تفاصيل الطلب", phase:"phase4", type:"preparateur", assign:"Ahmetou", desc:"عرض تفاصيل التجهيز", tech:["Flutter"], libs:[], flow:"GET /api/preparation/order/{id}" },
-        { id:34, src:"preperation guy _screen preperationd etuields order screen.jpeg", title:"تحديث حالة التجهيز", phase:"phase4", type:"preparateur", assign:"Cheick Hama", desc:"تغيير حالة الطلب", tech:["Flutter"], libs:["qr_flutter"], flow:"PATCH /api/preparation/update" },
-        { id:35, src:"butcher_qr_scan.jpeg", title:"مسح QR للحيوان", phase:"phase4", type:"preparateur", assign:"Ahmetou", desc:"التأكيد بالمسح", tech:["Flutter"], libs:["mobile_scanner"], flow:"POST /api/preparation/verify-animal" },
-        { id:36, src:"preparation_quality_check.jpeg", title:"فحص الجودة", phase:"phase4", type:"preparateur", assign:"Cheick Hama", desc:"تسجيل معايير الجودة", tech:["Flutter"], libs:[], flow:"POST /api/preparation/quality-report" },
-        
-        // ========== PHASE 5: DELIVERY & LOGISTICS (LIVREUR) (4 شاشات) ==========
-        { id:37, src:"livruer_screen delivary ordering detials screen.jpeg", title:"مهام التوصيل", phase:"phase5", type:"livreur", assign:"Inejih", desc:"قائمة الطلبات المخصصة", tech:["Flutter","Google Maps"], libs:["geolocator"], flow:"GET /api/delivery/tasks" },
-        { id:38, src:"livruer_screen delivary ordering detials screen2.jpeg", title:"تفاصيل مهمة التوصيل", phase:"phase5", type:"livreur", assign:"Inejih", desc:"عرض مسار التوصيل", tech:["Flutter"], libs:["google_maps_flutter"], flow:"عرض العنوان والمسافة" },
-        { id:39, src:"livruer_screen map screen.jpeg", title:"الملاحة المباشرة", phase:"phase5", type:"livreur", assign:"Inejih", desc:"توجيه إلى العميل", tech:["Flutter"], libs:["url_launcher"], flow:"فتح خرائط جوجل" },
-        { id:40, src:"livruer_screen qr code screen.jpeg", title:"تأكيد التسليم QR", phase:"phase5", type:"livreur", assign:"Inejih", desc:"مسح QR للعميل", tech:["Flutter"], libs:["mobile_scanner"], flow:"POST /api/delivery/confirm" },
-        
-        // ========== PHASE 6: ADMIN DASHBOARD & ANALYTICS (WEB FULL) (11 شاشات) ==========
-        { id:41, src:"admin_dashbaord web ui login page.jpeg", title:"Admin Login", phase:"phase6", type:"admin", assign:"Inejih", desc:"دخول المشرفين", tech:["Next.js","Tailwind","ShadCN"], libs:["next-auth","zod"], flow:"NextAuth.js + Django JWT" },
-        { id:42, src:"admin_dashbaord web ui dashabord page.jpeg", title:"Dashboard Analytics", phase:"phase6", type:"admin", assign:"Inejih", desc:"إحصائيات المنصة", tech:["Next.js","Recharts","TanStack"], libs:["recharts"], flow:"GET /api/admin/stats" },
-        { id:43, src:"admin_dashbaord web ui user managments page.jpeg", title:"إدارة المستخدمين", phase:"phase6", type:"admin", assign:"Inejih", desc:"CRUD كامل", tech:["Next.js","TanStack Table"], libs:["@tanstack/react-table"], flow:"GET/PATCH /api/admin/users" },
-        { id:44, src:"admin_dashbaord web ui saller  managments page.jpeg", title:"إدارة البائعين", phase:"phase6", type:"admin", assign:"Inejih", desc:"تفعيل البائعين", tech:["Next.js"], libs:["react-hook-form"], flow:"PATCH /api/admin/sellers/verify" },
-        { id:45, src:"admin_dashbaord web ui ssailelr listing approvments page.jpeg", title:"مراجعة الإعلانات", phase:"phase6", type:"admin", assign:"Inejih", desc:"الموافقة على الحيوانات", tech:["Next.js"], libs:["shadcn/ui"], flow:"PUT /api/admin/listings" },
-        { id:46, src:"admin_dashbaord web ui order approvments page.jpeg", title:"إدارة الطلبات", phase:"phase6", type:"admin", assign:"Inejih", desc:"مراقبة جميع الطلبات", tech:["Next.js"], libs:["date-fns"], flow:"GET /api/admin/orders" },
-        { id:47, src:"admin_dashbaord web ui paiements manegments page.jpeg", title:"المدفوعات", phase:"phase6", type:"admin", assign:"Inejih", desc:"مراجعة المعاملات", tech:["Next.js","Recharts"], libs:["csv-export"], flow:"GET /api/admin/payments" },
-        { id:48, src:"admin_dashbaord web ui delivery manegments page.jpeg", title:"إدارة السائقين", phase:"phase6", type:"admin", assign:"Inejih", desc:"تتبع الموقع", tech:["Next.js","Leaflet"], libs:["leaflet"], flow:"WebSocket live location" },
-        { id:49, src:"admin_dashbaord web ui animal preperation manegments page.jpeg", title:"مراكز التجهيز", phase:"phase6", type:"admin", assign:"Inejih", desc:"إدارة الجزارين", tech:["Next.js"], libs:[], flow:"GET /api/admin/preparation-centers" },
-        { id:50, src:"admin_dashbaord web ui settings page.jpeg", title:"إعدادات المنصة", phase:"phase6", type:"admin", assign:"Inejih", desc:"تكوين عام", tech:["Next.js","Zod"], libs:["react-hook-form"], flow:"PATCH /api/admin/settings" },
-        { id:51, src:"admin_reports.jpeg", title:"التقارير المتقدمة", phase:"phase6", type:"admin", assign:"Inejih", desc:"تصدير تقارير PDF/Excel", tech:["Next.js"], libs:["jspdf","xlsx"], flow:"GET /api/admin/reports/export" }
-    ];
-    
-    // التأكد من التوزيع: Inejih 15 (4 phase5 + 11 phase6) , Cheick Hama 15 , Ahmetou 15 (إجمالي 51؟ لا نحتاج 51 لكن 45 المطلوبة)
-    // لتكون دقيقة 45 شاشة سنأخذ أول 45 عنصر من المصفوفة المعدلة (لأننا أضفنا 6 شاشات إضافية للعمارة الاحترافية)
-    const finalScreens = screensDB.slice(0,45);
-    console.log("✅ عدد الشاشات النهائي:", finalScreens.length);
-    console.log("Inejih:", finalScreens.filter(s=>s.assign==="Inejih").length);
-    console.log("Cheick Hama:", finalScreens.filter(s=>s.assign==="Cheick Hama").length);
-    console.log("Ahmetou:", finalScreens.filter(s=>s.assign==="Ahmetou").length);
-    
-    // إحصائيات المراحل السبع
     const phasesMeta = [
         { key:"phase0", name:"🚀 المرحلة 0: التأسيس + Onboarding", icon:"fa-rocket", color:"emerald", desc:"البنية التحتية والشاشات التعريفية" },
-        { key:"phase1", name:"🔐 المرحلة 1: الأمان والمصادقة", icon:"fa-shield-haltered", color:"blue", desc:"JWT, 2FA, Biometric" },
-        { key:"phase2", name:"🛍️ المرحلة 2: السوق الأساسي (Acheteur)", icon:"fa-store", color:"amber", desc:"الشراء والدفع والتوصيل" },
-        { key:"phase3", name:"🌾 المرحلة 3: إدارة البائعين", icon:"fa-tractor", color:"green", desc:"إضافة الحيوانات والمخزون" },
+        { key:"phase1", name:"🔐 المرحلة 1: الأمان والمصادقة", icon:"fa-shield-haltered", color:"blue", desc:"JWT, OTP, Biometric" },
+        { key:"phase2", name:"🛍️ المرحلة 2: السوق الأساسي (Acheteur)", icon:"fa-store", color:"amber", desc:"الشراء، الدفع، التوصيل" },
+        { key:"phase3", name:"🌾 المرحلة 3: إدارة البائعين (Vendeur)", icon:"fa-tractor", color:"green", desc:"إضافة الحيوانات والمخزون" },
         { key:"phase4", name:"🔪 المرحلة 4: التجهيز والجزارة", icon:"fa-kitchen-set", color:"orange", desc:"سير عمل الجزارين" },
-        { key:"phase5", name:"🚚 المرحلة 5: اللوجستيات والتوصيل", icon:"fa-truck-fast", color:"sky", desc:"تتبع السائقين" },
-        { key:"phase6", name:"⚙️ المرحلة 6: الإدارة الكاملة (Web)", icon:"fa-chart-line", color:"slate", desc:"لوحة تحكم متقدمة Next.js" }
+        { key:"phase5", name:"🚚 المرحلة 5: اللوجستيات والتوصيل (Livreur)", icon:"fa-truck-fast", color:"sky", desc:"تتبع السائقين + QR" },
+        { key:"phase6", name:"⚙️ المرحلة 6: لوحة الإدارة (Web Admin)", icon:"fa-chart-line", color:"slate", desc:"Next.js Dashboard كاملة" }
     ];
-    
+
+    // جميع الشاشات الموجودة في الصور التي رفعتها (64 شاشة) بدون إضافة أي شيء جديد
+    const screensDB = [
+        // PHASE 0: FOUNDATION & ONBOARDING
+        { id:1, src:"achetuer_screen splash screen.jpeg", title:"Splash Screen", phase:"phase0", type:"foundation", assign:"Cheick Hama", desc:"شاشة البداية مع تهيئة التطبيق", tech:["Flutter"], libs:["flutter_native_splash"], flow:"تهيئة + تحقق من التوكن" },
+        { id:2, src:"all users _obbaoridng screen1.jpeg", title:"Onboarding 1 - السوق الذكي", phase:"phase0", type:"onboarding", assign:"Ahmetou", desc:"تقديم فكرة السوق", tech:["Flutter"], libs:["smooth_page_indicator"], flow:"شرائح تعليمية" },
+        { id:3, src:"all users _obbaoridng screen2.jpeg", title:"Onboarding 2 - الشراء الجماعي", phase:"phase0", type:"onboarding", assign:"Ahmetou", desc:"ميزة Group Buying", tech:["Flutter"], libs:[], flow:"تخزين حالة Onboarding" },
+        { id:4, src:"all users _obbaoridng screen3.jpeg", title:"Onboarding 3 - التوصيل السريع", phase:"phase0", type:"onboarding", assign:"Ahmetou", desc:"التوصيل من الباب للباب", tech:["Flutter"], libs:[], flow:"انتقال إلى Auth" },
+        { id:5, src:"all users _aproved and eabable permksion .jpeg", title:"أذونات التطبيق", phase:"phase0", type:"foundation", assign:"Cheick Hama", desc:"طلب Location, Camera, Notifications", tech:["Flutter"], libs:["permission_handler"], flow:"إدارة الأذونات" },
+
+        // PHASE 1: AUTHENTICATION
+        { id:6, src:"all users _screen loginscreen.jpeg", title:"شاشة تسجيل الدخول", phase:"phase1", type:"auth", assign:"Ahmetou", desc:"Login باستخدام رقم الهاتف + كلمة المرور", tech:["Flutter","Django"], libs:["dio"], flow:"POST /api/auth/login → JWT" },
+        { id:7, src:"all users _screen choose role screen-signup screen.jpeg", title:"اختيار نوع الحساب", phase:"phase1", type:"auth", assign:"Cheick Hama", desc:"Seller / Buyer / Butcher / Driver", tech:["Flutter"], libs:[], flow:"اختيار الدور → تسجيل" },
+        { id:8, src:"all users _screen create acount  screen.jpeg", title:"إكمال بيانات الحساب", phase:"phase1", type:"auth", assign:"Cheick Hama", desc:"Full Name, Phone, Farm Details, Email, Password", tech:["Flutter"], libs:["form_builder"], flow:"POST /api/auth/register" },
+        { id:9, src:"all users _screen otp screen.jpeg", title:"OTP Verification", phase:"phase1", type:"auth", assign:"Ahmetou", desc:"إدخال رمز التحقق", tech:["Flutter"], libs:["pinput"], flow:"POST /api/auth/verify-otp" },
+        { id:10, src:"all users _screen reinitiales pasword screen.jpeg", title:"إعادة تعيين كلمة المرور", phase:"phase1", type:"auth", assign:"Cheick Hama", desc:"إدخال رقم الهاتف لاستعادة الكلمة", tech:["Flutter"], libs:[], flow:"POST /api/auth/password-reset" },
+        { id:11, src:"all users _screen apprivng nand acocunte verifyed status +detileds  screen.jpeg", title:"Pending Approval", phase:"phase1", type:"auth", assign:"Cheick Hama", desc:"انتظار المراجعة والتفعيل", tech:["Flutter"], libs:[], flow:"حالة الحساب بعد التسجيل" },
+
+        // PHASE 2: ACHEUTEUR (BUYER)
+        { id:12, src:"achetuer_screen home screen.jpeg", title:"الصفحة الرئيسية للمشتري", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"عرض العروض والفلاتر", tech:["Flutter"], libs:["cached_network_image"], flow:"GET /api/marketplace" },
+        { id:13, src:"achetuer_screen filtering process screen.jpeg", title:"فلتر البحث", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"فلتر حسب النوع والسعر والمدينة", tech:["Flutter"], libs:[], flow:"فلترة ديناميكية" },
+        { id:14, src:"achetuer_screen filtering process2 screen.jpeg", title:"نتائج الفلترة", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"عرض النتائج بعد الفلتر", tech:["Flutter"], libs:[], flow:"تحميل النتائج" },
+        { id:15, src:"achetuer_screen animal detiaels.jpeg", title:"تفاصيل الحيوان", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"صور + وصف + سعر + موقع", tech:["Flutter","Google Maps"], libs:["google_maps_flutter"], flow:"GET /api/animals/{id}" },
+        { id:16, src:"achetuer_screen paiment process screen.jpeg", title:"اختيار طريقة التوصيل", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"Use my location أو Add address", tech:["Flutter"], libs:["geolocator"], flow:"تحديد العنوان" },
+        { id:17, src:"achetuer_screen paiment process screen2.jpeg", title:"خيارات التحضير", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"Whole / Cut / BBQ", tech:["Flutter"], libs:[], flow:"تخصيص الطلب" },
+        { id:18, src:"achetuer_screen paiment process screen3.jpeg", title:"ملخص الطلب", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"مراجعة قبل الدفع", tech:["Flutter"], libs:[], flow:"Order Summary" },
+        { id:19, src:"achetuer_screen paiment process screen4.jpeg", title:"Bankily Payment Code", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"عرض كود الدفع", tech:["Flutter"], libs:["webview_flutter"], flow:"تكامل Bankily" },
+        { id:20, src:"achetuer_screen paiment process screen5.jpeg", title:"فشل الدفع", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"Payment could not be verified", tech:["Flutter"], libs:[], flow:"Retry أو Contact Support" },
+        { id:21, src:"achetuer_screen paiment process screen6.jpeg", title:"نجاح الدفع", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"Payment Received", tech:["Flutter","FCM"], libs:["firebase_messaging"], flow:"إشعار + تحديث الحالة" },
+        { id:22, src:"achetuer_screen qr code scanning screen.jpeg", title:"مسح QR للحيوان", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"Scan Animal QR at Seller", tech:["Flutter"], libs:["mobile_scanner"], flow:"تأكيد الاستلام" },
+        { id:23, src:"achetuer_screen order_history screen.jpeg", title:"سجل الطلبات", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"تاريخ الطلبات مع الحالات", tech:["Flutter"], libs:[], flow:"GET /api/orders/history" },
+        { id:24, src:"achetuer_screen group paying detields  screen.jpeg", title:"تفاصيل الشراء الجماعي", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"Group Buy Progress + Participants", tech:["Flutter","WebSocket"], libs:["django_channels"], flow:"مشاركة فورية" },
+        { id:25, src:"achetuer_screen notification screen.jpeg", title:"إشعارات المشتري", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"Payment, Preparation, Delivery updates", tech:["Flutter"], libs:["firebase_messaging"], flow:"Real-time notifications" },
+        { id:26, src:"achetuer_screen command delevery live tracking.jpeg", title:"تتبع التوصيل المباشر", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"Live Map + Driver Info", tech:["Flutter","Google Maps"], libs:["google_maps_flutter"], flow:"WebSocket tracking" },
+        { id:27, src:"achetuer_screen animal preperaiton status  screen.jpeg", title:"حالة تجهيز الطلب", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"Preparation Finished + Ready for Pickup", tech:["Flutter"], libs:[], flow:"تحديث الحالة" },
+
+        // PHASE 3: VENDEUR (SELLER)
+        { id:28, src:"veendeur_screen home screen.jpeg", title:"لوحة تحكم البائع", phase:"phase3", type:"vendeur", assign:"Ahmetou", desc:"Active Listings + Sales", tech:["Flutter"], libs:["fl_chart"], flow:"Dashboard Stats" },
+        { id:29, src:"veendeur_screen adding animal process screen.jpeg", title:"إضافة حيوان - اختيار النوع", phase:"phase3", type:"vendeur", assign:"Cheick Hama", desc:"Sheep / Goat / Camel / Cow", tech:["Flutter"], libs:[], flow:"Multi-step form" },
+        { id:30, src:"veendeur_screen adding animal process screen2.jpeg", title:"سعر ووصف الحيوان", phase:"phase3", type:"vendeur", assign:"Ahmetou", desc:"Price, Weight, Description", tech:["Flutter"], libs:["form_builder"], flow:"Step 2" },
+        { id:31, src:"veendeur_screen adding animal process screen3.jpeg", title:"صور وموقع الحيوان", phase:"phase3", type:"vendeur", assign:"Cheick Hama", desc:"Upload Photos + Location", tech:["Flutter","Cloudinary"], libs:["image_picker"], flow:"Step 3" },
+        { id:32, src:"veendeur_screen adding animal process screen4.jpeg", title:"نشر العرض بنجاح", phase:"phase3", type:"vendeur", assign:"Ahmetou", desc:"Listing Published + QR Code", tech:["Flutter"], libs:["qr_flutter"], flow:"POST /api/animals" },
+        { id:33, src:"saller_screen notification listing screen.jpeg", title:"إشعارات البائع", phase:"phase3", type:"vendeur", assign:"Cheick Hama", desc:"New Orders, Payment Received", tech:["Flutter"], libs:["firebase_messaging"], flow:"Real-time alerts" },
+
+        // PHASE 4: PREPARATION (BUTCHER)
+        { id:34, src:"preperation guy _screen home screen.jpeg", title:"لوحة الجزار", phase:"phase4", type:"preparateur", assign:"Cheick Hama", desc:"Pending Orders + Active Tasks", tech:["Flutter"], libs:["django_channels"], flow:"WebSocket updates" },
+        { id:35, src:"preperation guy _screen preperationd orders order screen.jpeg", title:"تفاصيل طلب التجهيز", phase:"phase4", type:"preparateur", assign:"Ahmetou", desc:"Order Status + Checklist", tech:["Flutter"], libs:[], flow:"Preparation flow" },
+        { id:36, src:"preperation guy _screen preperationd etuields order screen.jpeg", title:"تعليمات التجهيز", phase:"phase4", type:"preparateur", assign:"Cheick Hama", desc:"Cutting Style, Packaging, Notes", tech:["Flutter"], libs:[], flow:"Update preparation" },
+        { id:37, src:"preperation guy _screen  animl bickup form delevery guy screen.jpeg", title:"استلام الحيوان من السائق", phase:"phase4", type:"preparateur", assign:"Ahmetou", desc:"Scan Driver QR", tech:["Flutter"], libs:["mobile_scanner"], flow:"Confirm receipt" },
+        { id:38, src:"butcher_screen notification listing screen.jpeg", title:"إشعارات الجزار", phase:"phase4", type:"preparateur", assign:"Cheick Hama", desc:"Queue Status + Alerts", tech:["Flutter"], libs:["firebase_messaging"], flow:"Real-time notifications" },
+
+        // PHASE 5: LIVREUR (DELIVERY)
+        { id:39, src:"delevery_guy_screen notification listing screen.jpeg", title:"إشعارات السائق", phase:"phase5", type:"livreur", assign:"Inejih", desc:"Active Tasks + Critical Alerts", tech:["Flutter"], libs:["firebase_messaging"], flow:"Real-time driver alerts" },
+        { id:40, src:"livruer_screen delivary ordering detials screen.jpeg", title:"تفاصيل مهمة التوصيل", phase:"phase5", type:"livreur", assign:"Inejih", desc:"Seller & Buyer Info + Route", tech:["Flutter"], libs:["google_maps_flutter"], flow:"Delivery details" },
+        { id:41, src:"livruer_screen delivary ordering detials screen2.jpeg", title:"مهام التوصيل النشطة", phase:"phase5", type:"livreur", assign:"Inejih", desc:"Active / Completed Tasks", tech:["Flutter"], libs:[], flow:"Task list" },
+        { id:42, src:"livruer_screen map screen.jpeg", title:"خريطة التنقل", phase:"phase5", type:"livreur", assign:"Inejih", desc:"Live Navigation", tech:["Flutter"], libs:["google_maps_flutter"], flow:"Turn-by-turn" },
+        { id:43, src:"livruer_screen qr code screen.jpeg", title:"مسح QR للتسليم", phase:"phase5", type:"livreur", assign:"Inejih", desc:"Scan to Confirm", tech:["Flutter"], libs:["mobile_scanner"], flow:"QR verification" },
+        { id:44, src:"livruer_screen delivary picking  the animal form the bucher screen.jpeg", title:"مسح QR عند الجزار أو المشتري", phase:"phase5", type:"livreur", assign:"Inejih", desc:"Pickup / Delivery Confirmation", tech:["Flutter"], libs:["mobile_scanner"], flow:"Confirm handoff" },
+        { id:45, src:"delevery_guy_screen qr scaning at the bucher or achetuer  delivery or bickupscreen.jpeg", title:"Driver Payment Received", phase:"phase5", type:"livreur", assign:"Inejih", desc:"Payment after completion", tech:["Flutter"], libs:[], flow:"Payout confirmation" },
+        { id:46, src:"driver-saler-or-bucher moeny or for eaach orde rpeiemtn after complisionad bickup or delevery ..ect.jpeg", title:"استلام المبلغ بعد التسليم", phase:"phase5", type:"livreur", assign:"Inejih", desc:"Payment Received Successfully", tech:["Flutter"], libs:[], flow:"Wallet update" },
+
+        // PHASE 6: ADMIN WEB DASHBOARD
+        { id:47, src:"admin_dashbaord web ui login page.jpeg", title:"Admin Login", phase:"phase6", type:"admin", assign:"Inejih", desc:"دخول لوحة الإدارة", tech:["Next.js","Tailwind"], libs:["next-auth"], flow:"Secure Admin Login" },
+        { id:48, src:"admin_dashbaord web ui otp page.jpeg", title:"Admin OTP Verification", phase:"phase6", type:"admin", assign:"Inejih", desc:"التحقق الثنائي", tech:["Next.js"], libs:[], flow:"OTP for Admin" },
+        { id:49, src:"admin_dashbaord web ui dashabord page.jpeg", title:"Dashboard Overview", phase:"phase6", type:"admin", assign:"Inejih", desc:"إحصائيات عامة", tech:["Next.js","Recharts"], libs:["recharts"], flow:"Analytics" },
+        { id:50, src:"admin_dashbaord web ui user managments page.jpeg", title:"إدارة المستخدمين", phase:"phase6", type:"admin", assign:"Inejih", desc:"Users CRUD", tech:["Next.js","TanStack Table"], libs:["@tanstack/react-table"], flow:"User Management" },
+        { id:51, src:"admin_dashbaord web ui saller  managments page.jpeg", title:"إدارة البائعين", phase:"phase6", type:"admin", assign:"Inejih", desc:"Sellers Verification", tech:["Next.js"], libs:["react-hook-form"], flow:"Seller Approval" },
+        { id:52, src:"admin_dashbaord web ui ssailelr listing approvments page.jpeg", title:"الموافقة على الإعلانات", phase:"phase6", type:"admin", assign:"Inejih", desc:"Listings Moderation", tech:["Next.js"], libs:["shadcn/ui"], flow:"Bulk Approve" },
+        { id:53, src:"admin_dashbaord web ui order approvments page.jpeg", title:"إدارة الطلبات", phase:"phase6", type:"admin", assign:"Inejih", desc:"Orders Overview", tech:["Next.js"], libs:["date-fns"], flow:"Order Management" },
+        { id:54, src:"admin_dashbaord web ui paiements manegments page.jpeg", title:"إدارة المدفوعات", phase:"phase6", type:"admin", assign:"Inejih", desc:"Payments & Transactions", tech:["Next.js","Recharts"], libs:["csv-export"], flow:"Financial Control" },
+        { id:55, src:"admin_dashbaord web ui peiments mangments page.jpeg", title:"Payments Queue", phase:"phase6", type:"admin", assign:"Inejih", desc:"Payout Management", tech:["Next.js"], libs:[], flow:"Bulk Payouts" },
+        { id:56, src:"admin_dashbaord web ui peiments mangments2 page.jpeg", title:"Payments Queue 2", phase:"phase6", type:"admin", assign:"Inejih", desc:"Detailed Payout List", tech:["Next.js"], libs:[], flow:"Queue Management" },
+        { id:57, src:"admin_dashbaord web ui delivery manegments page.jpeg", title:"إدارة السائقين", phase:"phase6", type:"admin", assign:"Inejih", desc:"Drivers + Live Tracking", tech:["Next.js","Leaflet"], libs:["leaflet"], flow:"Fleet Management" },
+        { id:58, src:"admin_dashbaord web ui animal preperation manegments page.jpeg", title:"إدارة مراكز التجهيز", phase:"phase6", type:"admin", assign:"Inejih", desc:"Butchers Directory", tech:["Next.js"], libs:[], flow:"Preparation Providers" },
+        { id:59, src:"admin_dashbaord web ui settings page.jpeg", title:"إعدادات المنصة", phase:"phase6", type:"admin", assign:"Inejih", desc:"Platform Configuration + Gateways", tech:["Next.js"], libs:["react-hook-form"], flow:"Settings" },
+
+        // إضافات أخرى موجودة في الصور
+        { id:60, src:"bankily_payment_processing.jpeg", title:"معالجة الدفع Bankily", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"Verifying Payment", tech:["Flutter"], libs:[], flow:"Bankily Processing" },
+        { id:61, src:"bankily_payment_confirmation.jpeg", title:"تأكيد الدفع Bankily", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"Enter Code + Verify", tech:["Flutter"], libs:[], flow:"Bankily Confirmation" },
+        { id:62, src:"achetuer_screen notification listing screen.jpeg", title:"إشعارات المشتري 2", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"All Notifications", tech:["Flutter"], libs:[], flow:"Unified Notifications" },
+        { id:63, src:"saller_screen notification listing screen.jpeg", title:"إشعارات البائع 2", phase:"phase3", type:"vendeur", assign:"Cheick Hama", desc:"Seller Alerts", tech:["Flutter"], libs:[], flow:"Seller Notifications" },
+        { id:64, src:"delevery_guy_screen qr scaning at the bucher or achetuer delivery or bickupscreen.jpeg", title:"QR Scan Pickup/Delivery", phase:"phase5", type:"livreur", assign:"Inejih", desc:"Confirm at Butcher/Buyer", tech:["Flutter"], libs:["mobile_scanner"], flow:"QR Handoff" }
+    ];
+// ===================== COUNT SCREENS PER DEVELOPER & PHASE =====================
+
+
+
+// Count per developer
+const countInejih = screensDB.filter(s => s.assign === "Inejih").length;
+const countCheick = screensDB.filter(s => s.assign === "Cheick Hama").length;
+const countAhmetou = screensDB.filter(s => s.assign === "Ahmetou").length;
+
+console.log("📊 Total Screens:", screensDB.length);
+console.log("Inejih     :", countInejih);
+console.log("Cheick Hama:", countCheick);
+console.log("Ahmetou    :", countAhmetou);
+
+// Count per phase
+const phaseCounts = {};
+screensDB.forEach(screen => {
+    phaseCounts[screen.phase] = (phaseCounts[screen.phase] || 0) + 1;
+});
+
+console.log("\n📈 Screens per Phase:");
+Object.keys(phaseCounts).sort().forEach(phase => {
+    console.log(`${phase}: ${phaseCounts[phase]}`);
+});
+
+// Optional: Print names of screens for each developer (for verification)
+console.log("\nInejih screens:");
+screensDB.filter(s => s.assign === "Inejih").forEach(s => console.log(`- ${s.title}`));
+console.log("\nCheick Hama screens:");
+screensDB.filter(s => s.assign === "Cheick Hama").forEach(s => console.log(`- ${s.title}`));
+console.log("\nAhmetou screens:");
+screensDB.filter(s => s.assign === "Ahmetou").forEach(s => console.log(`- ${s.title}`));
+
+
     let currentPhaseFilter = "all";
     let currentTeamFilter = "all";
-    
+
     function renderSevenPhases() {
         const container = document.getElementById("sevenPhasesStats");
         container.innerHTML = phasesMeta.map(phase => {
-            const count = finalScreens.filter(s => s.phase === phase.key).length;
+            const count = screensDB.filter(s => s.phase === phase.key).length;
             return `
-                <div onclick="setPhaseFilter('${phase.key}')" class="phase-card bg-white rounded-2xl p-3 text-center shadow-md hover:shadow-xl border-b-4 border-${phase.color}-500">
+                <div onclick="setPhaseFilter('${phase.key}')" class="phase-card bg-white rounded-2xl p-3 text-center shadow-md hover:shadow-xl border-b-4 border-${phase.color}-500 cursor-pointer">
                     <i class="fa-solid ${phase.icon} text-2xl text-${phase.color}-600"></i>
                     <h3 class="text-xl font-black mt-1">${count}</h3>
                     <p class="text-xs font-bold">${phase.name.split(':')[0]}</p>
-                    <p class="text-[10px] text-slate-500">${phase.desc.substring(0,25)}</p>
+                    <p class="text-[10px] text-slate-500">${phase.desc.substring(0,28)}...</p>
                 </div>
             `;
         }).join('');
     }
-    
+
     function renderFilters() {
         const teamDiv = document.getElementById("quickFilterTeam");
         teamDiv.innerHTML = `
-            <button class="px-5 py-2 rounded-full font-bold transition-all ${currentTeamFilter==='all' ? 'bg-emerald-700 text-white shadow-lg' : 'bg-white border text-slate-700'}" onclick="setTeamFilter('all')">👥 جميع المطورين</button>
-            <button class="px-5 py-2 rounded-full font-bold transition-all ${currentTeamFilter==='Inejih' ? 'bg-emerald-700 text-white shadow-lg' : 'bg-white border text-slate-700'}" onclick="setTeamFilter('Inejih')">🧑‍💻 Inejih (15)</button>
-            <button class="px-5 py-2 rounded-full font-bold transition-all ${currentTeamFilter==='Cheick Hama' ? 'bg-emerald-700 text-white shadow-lg' : 'bg-white border text-slate-700'}" onclick="setTeamFilter('Cheick Hama')">👳 Cheick Hama (15)</button>
-            <button class="px-5 py-2 rounded-full font-bold transition-all ${currentTeamFilter==='Ahmetou' ? 'bg-emerald-700 text-white shadow-lg' : 'bg-white border text-slate-700'}" onclick="setTeamFilter('Ahmetou')">🧔 Ahmetou (15)</button>
+            <button onclick="setTeamFilter('all')" class="px-5 py-2 rounded-full font-bold transition-all ${currentTeamFilter==='all' ? 'bg-emerald-700 text-white shadow-lg' : 'bg-white border text-slate-700'}">👥 جميع المطورين (64)</button>
+            <button onclick="setTeamFilter('Inejih')" class="px-5 py-2 rounded-full font-bold transition-all ${currentTeamFilter==='Inejih' ? 'bg-emerald-700 text-white shadow-lg' : 'bg-white border text-slate-700'}">🧑‍💻 Inejih (Admin + Delivery)</button>
+            <button onclick="setTeamFilter('Cheick Hama')" class="px-5 py-2 rounded-full font-bold transition-all ${currentTeamFilter==='Cheick Hama' ? 'bg-emerald-700 text-white shadow-lg' : 'bg-white border text-slate-700'}">👳 Cheick Hama</button>
+            <button onclick="setTeamFilter('Ahmetou')" class="px-5 py-2 rounded-full font-bold transition-all ${currentTeamFilter==='Ahmetou' ? 'bg-emerald-700 text-white shadow-lg' : 'bg-white border text-slate-700'}">🧔 Ahmetou</button>
         `;
+
         const phaseDiv = document.getElementById("phaseFilterButtonsAdvanced");
         phaseDiv.innerHTML = `
-            <button class="text-sm px-4 py-2 rounded-full font-bold ${currentPhaseFilter==='all' ? 'bg-slate-800 text-white' : 'bg-white border'}" onclick="setPhaseFilter('all')">📱 كل المراحل (7)</button>
-            ${phasesMeta.map(p => `<button class="text-sm px-4 py-2 rounded-full font-bold ${currentPhaseFilter===p.key ? 'bg-${p.color}-600 text-white' : 'bg-white border'}" onclick="setPhaseFilter('${p.key}')">${p.name.substring(0,18)}</button>`).join('')}
+            <button onclick="setPhaseFilter('all')" class="text-sm px-4 py-2 rounded-full font-bold ${currentPhaseFilter==='all' ? 'bg-slate-800 text-white' : 'bg-white border'}">📱 كل الشاشات (64)</button>
+            ${phasesMeta.map(p => `
+                <button onclick="setPhaseFilter('${p.key}')" class="text-sm px-4 py-2 rounded-full font-bold ${currentPhaseFilter===p.key ? 'bg-emerald-700 text-white' : 'bg-white border'}">
+                    ${p.name.split(':')[0]}
+                </button>
+            `).join('')}
         `;
     }
-    
-    function setTeamFilter(team) { currentTeamFilter = team; renderFilters(); renderScreens(); }
-    function setPhaseFilter(phase) { currentPhaseFilter = phase; renderFilters(); renderScreens(); }
-    
+
+    function setTeamFilter(team) {
+        currentTeamFilter = team;
+        renderFilters();
+        renderScreens();
+    }
+
+    function setPhaseFilter(phase) {
+        currentPhaseFilter = phase;
+        renderFilters();
+        renderScreens();
+    }
+
     function renderScreens() {
-        let filtered = finalScreens;
-        if(currentTeamFilter !== "all") filtered = filtered.filter(s => s.assign === currentTeamFilter);
-        if(currentPhaseFilter !== "all") filtered = filtered.filter(s => s.phase === currentPhaseFilter);
+        let filtered = screensDB;
+        if (currentTeamFilter !== "all") filtered = filtered.filter(s => s.assign === currentTeamFilter);
+        if (currentPhaseFilter !== "all") filtered = filtered.filter(s => s.phase === currentPhaseFilter);
+
         const container = document.getElementById("screensContainer");
-        if(filtered.length === 0) { container.innerHTML = `<div class="text-center p-16 bg-white rounded-3xl shadow"><i class="fa-regular fa-face-frown text-6xl"></i><p class="mt-4">لا شاشات في هذا الفلتر</p></div>`; return; }
-        
-        const grouped = {};
-        filtered.forEach(s => { if(!grouped[s.phase]) grouped[s.phase] = []; grouped[s.phase].push(s); });
-        let html = '';
-        for(let phaseKey of phasesMeta.map(p=>p.key)) {
-            if(!grouped[phaseKey]) continue;
-            const phaseInfo = phasesMeta.find(p=>p.key===phaseKey);
-            html += `<div class="mb-12"><div class="phase-header pr-4 mb-5 p-3 rounded-2xl"><h2 class="text-xl font-black text-slate-800"><i class="fa-solid ${phaseInfo.icon} text-emerald-600 ml-2"></i> ${phaseInfo.name} <span class="text-emerald-600">(${grouped[phaseKey].length} شاشة)</span></h2><p class="text-xs text-slate-500">${phaseInfo.desc}</p></div><div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">`;
-            grouped[phaseKey].forEach(screen => {
-                html += `<div class="screen-card bg-white rounded-2xl overflow-hidden shadow-md cursor-pointer hover:shadow-xl" onclick='showTechModal(${JSON.stringify(screen).replace(/'/g, "&#39;")})'><div class="relative"><img src="${screen.src}" class="w-full aspect-[9/16] object-cover bg-gray-100" alt="${screen.title}" onerror="this.src='https://placehold.co/300x500?text=${encodeURIComponent(screen.title)}'"><div class="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded-full">${screen.assign}</div></div><div class="p-3"><p class="font-bold text-sm">${screen.title}</p><div class="flex justify-between mt-1 text-xs"><span><i class="fa-regular fa-folder-open"></i> ${screen.type}</span><span class="bg-slate-100 px-2 rounded-full">${screen.phase.toUpperCase()}</span></div></div></div>`;
-            });
-            html += `</div></div>`;
+        if (filtered.length === 0) {
+            container.innerHTML = `<div class="text-center p-16 bg-white rounded-3xl shadow"><i class="fa-regular fa-face-frown text-6xl text-slate-400"></i><p class="mt-4 text-slate-600">لا توجد شاشات في هذا الفلتر</p></div>`;
+            return;
         }
+
+        const grouped = {};
+        filtered.forEach(s => {
+            if (!grouped[s.phase]) grouped[s.phase] = [];
+            grouped[s.phase].push(s);
+        });
+
+        let html = '';
+        phasesMeta.forEach(phaseInfo => {
+            const group = grouped[phaseInfo.key];
+            if (!group || group.length === 0) return;
+
+            html += `
+                <div class="mb-12">
+                    <div class="phase-header pr-4 mb-5 p-4 rounded-2xl">
+                        <h2 class="text-xl font-black text-slate-800 flex items-center gap-3">
+                            <i class="fa-solid ${phaseInfo.icon} text-emerald-600"></i> 
+                            ${phaseInfo.name} 
+                            <span class="text-emerald-600 text-base">(${group.length} شاشة)</span>
+                        </h2>
+                        <p class="text-xs text-slate-500 mt-1">${phaseInfo.desc}</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+            `;
+
+            group.forEach(screen => {
+                html += `
+                    <div class="screen-card bg-white rounded-2xl overflow-hidden shadow-md cursor-pointer hover:shadow-2xl" onclick='showTechModal(${JSON.stringify(screen).replace(/'/g, "\\'")})'>
+                        <div class="relative">
+                            <img src="${screen.src}" class="w-full aspect-[9/19] object-cover bg-gray-100" alt="${screen.title}" 
+                                 onerror="this.src='https://placehold.co/300x570?text=${encodeURIComponent(screen.title)}&font=cairo'">
+                            <div class="absolute top-3 right-3 bg-black/70 text-white text-[10px] px-2.5 py-1 rounded-full font-medium">
+                                ${screen.assign}
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <p class="font-bold text-sm leading-tight">${screen.title}</p>
+                            <div class="flex justify-between text-[10px] text-slate-500 mt-2">
+                                <span>${screen.type}</span>
+                                <span class="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">${screen.phase.toUpperCase()}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `</div></div>`;
+        });
+
         container.innerHTML = html;
     }
-    
+
     window.showTechModal = function(screen) {
         document.getElementById("modalTitle").innerText = screen.title;
-        document.getElementById("modalImg").src = screen.src;
-        document.getElementById("modalDesc").innerText = screen.desc;
+        document.getElementById("modalImg").src = screen.src || "https://placehold.co/600x1100?text=Screen+Preview";
+        document.getElementById("modalDesc").innerText = screen.desc || "شاشة من تطبيق ALMARBAT";
         document.getElementById("modalAssignee").innerHTML = `<i class="fa-regular fa-user"></i> ${screen.assign}`;
-        const phaseObj = phasesMeta.find(p=>p.key===screen.phase);
+        
+        const phaseObj = phasesMeta.find(p => p.key === screen.phase);
         document.getElementById("modalPhaseTag").innerHTML = `<i class="fa-solid ${phaseObj?.icon}"></i> ${phaseObj?.name || screen.phase}`;
-        document.getElementById("modalTechStack").innerHTML = screen.tech.map(t => `<span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs"><i class="fa-solid fa-code"></i> ${t}</span>`).join("");
-        document.getElementById("modalLibraries").innerHTML = screen.libs.map(l => `<span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs"><i class="fa-regular fa-gem"></i> ${l}</span>`).join("");
-        document.getElementById("modalFlow").innerText = screen.flow;
-        document.getElementById("techModal").classList.remove("hidden");
-        document.getElementById("techModal").style.display = "flex";
+
+        document.getElementById("modalTechStack").innerHTML = (screen.tech || ["Flutter"]).map(t => 
+            `<span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs"><i class="fa-solid fa-code"></i> ${t}</span>`
+        ).join("");
+
+        document.getElementById("modalLibraries").innerHTML = (screen.libs || []).map(l => 
+            `<span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs"><i class="fa-regular fa-gem"></i> ${l}</span>`
+        ).join("");
+
+        document.getElementById("modalFlow").innerText = screen.flow || "تدفق البيانات الافتراضي";
+
+        const modal = document.getElementById("techModal");
+        modal.classList.remove("hidden");
+        modal.style.display = "flex";
     };
-    window.closeTechModal = function() { document.getElementById("techModal").style.display = "none"; document.getElementById("techModal").classList.add("hidden"); };
-    
-    function init() { renderSevenPhases(); renderFilters(); renderScreens(); }
+
+    window.closeTechModal = function() {
+        const modal = document.getElementById("techModal");
+        modal.style.display = "none";
+        modal.classList.add("hidden");
+    };
+
+    function init() {
+        renderSevenPhases();
+        renderFilters();
+        renderScreens();
+    }
+
     init();
 </script>
 </body>
