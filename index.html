@@ -10,7 +10,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Cairo:wght@400;500;600;700;800&display=swap');
         * { transition: all 0.2s ease; }
         body { font-family: 'Cairo', 'Inter', system-ui; background: #f8fafc; }
-        .screen-card { transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
+        .screen-card { transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1); position: relative; overflow: hidden; }
         .screen-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 25px 35px -12px rgba(0,0,0,0.2); }
         .phase-header { border-right: 8px solid #1f6e43; background: linear-gradient(90deg, transparent, #f0fdf4); }
         ::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -20,6 +20,44 @@
         .animate-entry { animation: fadeSlide 0.4s ease-out; }
         .phase-card { transition: all 0.2s; cursor: pointer; }
         .phase-card:hover { transform: translateY(-4px); box-shadow: 0 12px 20px -12px rgba(0,0,0,0.2); }
+        /* زر الحذف - تصميم واضح وغير متداخل */
+        .delete-image-btn {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 30;
+            background: rgba(220, 38, 38, 0.9);
+            backdrop-filter: blur(4px);
+            border: none;
+            border-radius: 9999px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .delete-image-btn:hover {
+            background: #dc2626;
+            transform: scale(1.05);
+            box-shadow: 0 6px 14px rgba(220,38,38,0.5);
+        }
+        .delete-image-btn:active {
+            transform: scale(0.95);
+        }
+        /* تحسين للحفاظ على تنسيق الصورة */
+        .img-wrapper {
+            position: relative;
+            display: block;
+        }
+        /* تعطيل الحدث للزر حتى لا يتعارض مع النقر على البطاقة */
+        .delete-image-btn {
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body>
@@ -99,7 +137,7 @@
 </div>
 
 <script>
-    // ===================== العمارة الاحترافية: 7 مراحل متقدمة =====================
+    // ===================== العمارة الاحترافية: 7 مراحل متقدمة (نفس البيانات الأصلية بدون تغيير أي اسم صورة) =====================
     const phasesMeta = [
         { key:"phase0", name:"🚀 المرحلة 0: التأسيس + Onboarding", icon:"fa-rocket", color:"emerald", desc:"البنية التحتية والشاشات التعريفية" },
         { key:"phase1", name:"🔐 المرحلة 1: الأمان والمصادقة", icon:"fa-shield-haltered", color:"blue", desc:"JWT, OTP, Biometric" },
@@ -111,6 +149,7 @@
     ];
 
     // جميع الشاشات الموجودة في الصور التي رفعتها (64 شاشة) بدون إضافة أي شيء جديد
+    // تأكد: كل أسماء الملفات كما هي بالضبط، لم نغير ولا مسافة ولا حرف.
     const screensDB = [
         // PHASE 0: FOUNDATION & ONBOARDING
         { id:1, src:"achetuer_screen splash screen.jpeg", title:"Splash Screen", phase:"phase0", type:"foundation", assign:"Cheick Hama", desc:"شاشة البداية مع تهيئة التطبيق", tech:["Flutter"], libs:["flutter_native_splash"], flow:"تهيئة + تحقق من التوكن" },
@@ -185,54 +224,39 @@
         { id:58, src:"admin_dashbaord web ui animal preperation manegments page.jpeg", title:"إدارة مراكز التجهيز", phase:"phase6", type:"admin", assign:"Inejih", desc:"Butchers Directory", tech:["Next.js"], libs:[], flow:"Preparation Providers" },
         { id:59, src:"admin_dashbaord web ui settings page.jpeg", title:"إعدادات المنصة", phase:"phase6", type:"admin", assign:"Inejih", desc:"Platform Configuration + Gateways", tech:["Next.js"], libs:["react-hook-form"], flow:"Settings" },
 
-        // إضافات أخرى موجودة في الصور
+        // إضافات أخرى موجودة في الصور (الحفاظ على جميع الأسماء والمسافات)
         { id:60, src:"bankily_payment_processing.jpeg", title:"معالجة الدفع Bankily", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"Verifying Payment", tech:["Flutter"], libs:[], flow:"Bankily Processing" },
         { id:61, src:"bankily_payment_confirmation.jpeg", title:"تأكيد الدفع Bankily", phase:"phase2", type:"acheteur", assign:"Cheick Hama", desc:"Enter Code + Verify", tech:["Flutter"], libs:[], flow:"Bankily Confirmation" },
         { id:62, src:"achetuer_screen notification listing screen.jpeg", title:"إشعارات المشتري 2", phase:"phase2", type:"acheteur", assign:"Ahmetou", desc:"All Notifications", tech:["Flutter"], libs:[], flow:"Unified Notifications" },
         { id:63, src:"saller_screen notification listing screen.jpeg", title:"إشعارات البائع 2", phase:"phase3", type:"vendeur", assign:"Cheick Hama", desc:"Seller Alerts", tech:["Flutter"], libs:[], flow:"Seller Notifications" },
         { id:64, src:"delevery_guy_screen qr scaning at the bucher or achetuer delivery or bickupscreen.jpeg", title:"QR Scan Pickup/Delivery", phase:"phase5", type:"livreur", assign:"Inejih", desc:"Confirm at Butcher/Buyer", tech:["Flutter"], libs:["mobile_scanner"], flow:"QR Handoff" }
     ];
-// ===================== COUNT SCREENS PER DEVELOPER & PHASE =====================
 
-
-
-// Count per developer
-const countInejih = screensDB.filter(s => s.assign === "Inejih").length;
-const countCheick = screensDB.filter(s => s.assign === "Cheick Hama").length;
-const countAhmetou = screensDB.filter(s => s.assign === "Ahmetou").length;
-
-console.log("📊 Total Screens:", screensDB.length);
-console.log("Inejih     :", countInejih);
-console.log("Cheick Hama:", countCheick);
-console.log("Ahmetou    :", countAhmetou);
-
-// Count per phase
-const phaseCounts = {};
-screensDB.forEach(screen => {
-    phaseCounts[screen.phase] = (phaseCounts[screen.phase] || 0) + 1;
-});
-
-console.log("\n📈 Screens per Phase:");
-Object.keys(phaseCounts).sort().forEach(phase => {
-    console.log(`${phase}: ${phaseCounts[phase]}`);
-});
-
-// Optional: Print names of screens for each developer (for verification)
-console.log("\nInejih screens:");
-screensDB.filter(s => s.assign === "Inejih").forEach(s => console.log(`- ${s.title}`));
-console.log("\nCheick Hama screens:");
-screensDB.filter(s => s.assign === "Cheick Hama").forEach(s => console.log(`- ${s.title}`));
-console.log("\nAhmetou screens:");
-screensDB.filter(s => s.assign === "Ahmetou").forEach(s => console.log(`- ${s.title}`));
-
+    // متغير الحالة الحية للشاشات (سيتم تعديلها عند الحذف)
+    let currentScreens = [...screensDB];
 
     let currentPhaseFilter = "all";
     let currentTeamFilter = "all";
 
+    // وظيفة الحذف: إزالة الشاشة نهائياً مع الحفاظ على كل شيء آخر
+    window.deleteScreen = function(screenId, event) {
+        event.stopPropagation(); // منع فتح الـ modal عند الضغط على زر الحذف
+        const index = currentScreens.findIndex(s => s.id === screenId);
+        if (index !== -1) {
+            currentScreens.splice(index, 1);
+            // إعادة عرض الواجهة بالكامل مع الفلاتر الحالية
+            renderSevenPhases();
+            renderFilters();
+            renderScreens();
+            // إظهار رسالة بسيطة في Console فقط (اختياري) - لا نغير أي شيء في الواجهة
+            console.log(`✅ تم حذف الشاشة ذات المعرف ${screenId} بنجاح.`);
+        }
+    };
+
     function renderSevenPhases() {
         const container = document.getElementById("sevenPhasesStats");
         container.innerHTML = phasesMeta.map(phase => {
-            const count = screensDB.filter(s => s.phase === phase.key).length;
+            const count = currentScreens.filter(s => s.phase === phase.key).length;
             return `
                 <div onclick="setPhaseFilter('${phase.key}')" class="phase-card bg-white rounded-2xl p-3 text-center shadow-md hover:shadow-xl border-b-4 border-${phase.color}-500 cursor-pointer">
                     <i class="fa-solid ${phase.icon} text-2xl text-${phase.color}-600"></i>
@@ -246,21 +270,27 @@ screensDB.filter(s => s.assign === "Ahmetou").forEach(s => console.log(`- ${s.ti
 
     function renderFilters() {
         const teamDiv = document.getElementById("quickFilterTeam");
+        const totalCount = currentScreens.length;
+        const inejihCount = currentScreens.filter(s => s.assign === "Inejih").length;
+        const cheickCount = currentScreens.filter(s => s.assign === "Cheick Hama").length;
+        const ahmetouCount = currentScreens.filter(s => s.assign === "Ahmetou").length;
+        
         teamDiv.innerHTML = `
-            <button onclick="setTeamFilter('all')" class="px-5 py-2 rounded-full font-bold transition-all ${currentTeamFilter==='all' ? 'bg-emerald-700 text-white shadow-lg' : 'bg-white border text-slate-700'}">👥 جميع المطورين (64)</button>
-            <button onclick="setTeamFilter('Inejih')" class="px-5 py-2 rounded-full font-bold transition-all ${currentTeamFilter==='Inejih' ? 'bg-emerald-700 text-white shadow-lg' : 'bg-white border text-slate-700'}">🧑‍💻 Inejih (Admin + Delivery)</button>
-            <button onclick="setTeamFilter('Cheick Hama')" class="px-5 py-2 rounded-full font-bold transition-all ${currentTeamFilter==='Cheick Hama' ? 'bg-emerald-700 text-white shadow-lg' : 'bg-white border text-slate-700'}">👳 Cheick Hama</button>
-            <button onclick="setTeamFilter('Ahmetou')" class="px-5 py-2 rounded-full font-bold transition-all ${currentTeamFilter==='Ahmetou' ? 'bg-emerald-700 text-white shadow-lg' : 'bg-white border text-slate-700'}">🧔 Ahmetou</button>
+            <button onclick="setTeamFilter('all')" class="px-5 py-2 rounded-full font-bold transition-all ${currentTeamFilter==='all' ? 'bg-emerald-700 text-white shadow-lg' : 'bg-white border text-slate-700'}">👥 جميع المطورين (${totalCount})</button>
+            <button onclick="setTeamFilter('Inejih')" class="px-5 py-2 rounded-full font-bold transition-all ${currentTeamFilter==='Inejih' ? 'bg-emerald-700 text-white shadow-lg' : 'bg-white border text-slate-700'}">🧑‍💻 Inejih (${inejihCount})</button>
+            <button onclick="setTeamFilter('Cheick Hama')" class="px-5 py-2 rounded-full font-bold transition-all ${currentTeamFilter==='Cheick Hama' ? 'bg-emerald-700 text-white shadow-lg' : 'bg-white border text-slate-700'}">👳 Cheick Hama (${cheickCount})</button>
+            <button onclick="setTeamFilter('Ahmetou')" class="px-5 py-2 rounded-full font-bold transition-all ${currentTeamFilter==='Ahmetou' ? 'bg-emerald-700 text-white shadow-lg' : 'bg-white border text-slate-700'}">🧔 Ahmetou (${ahmetouCount})</button>
         `;
 
         const phaseDiv = document.getElementById("phaseFilterButtonsAdvanced");
         phaseDiv.innerHTML = `
-            <button onclick="setPhaseFilter('all')" class="text-sm px-4 py-2 rounded-full font-bold ${currentPhaseFilter==='all' ? 'bg-slate-800 text-white' : 'bg-white border'}">📱 كل الشاشات (64)</button>
-            ${phasesMeta.map(p => `
-                <button onclick="setPhaseFilter('${p.key}')" class="text-sm px-4 py-2 rounded-full font-bold ${currentPhaseFilter===p.key ? 'bg-emerald-700 text-white' : 'bg-white border'}">
-                    ${p.name.split(':')[0]}
-                </button>
-            `).join('')}
+            <button onclick="setPhaseFilter('all')" class="text-sm px-4 py-2 rounded-full font-bold ${currentPhaseFilter==='all' ? 'bg-slate-800 text-white' : 'bg-white border'}">📱 كل الشاشات (${totalCount})</button>
+            ${phasesMeta.map(p => {
+                const phaseCount = currentScreens.filter(s => s.phase === p.key).length;
+                return `<button onclick="setPhaseFilter('${p.key}')" class="text-sm px-4 py-2 rounded-full font-bold ${currentPhaseFilter===p.key ? 'bg-emerald-700 text-white' : 'bg-white border'}">
+                    ${p.name.split(':')[0]} (${phaseCount})
+                </button>`;
+            }).join('')}
         `;
     }
 
@@ -277,7 +307,7 @@ screensDB.filter(s => s.assign === "Ahmetou").forEach(s => console.log(`- ${s.ti
     }
 
     function renderScreens() {
-        let filtered = screensDB;
+        let filtered = [...currentScreens];
         if (currentTeamFilter !== "all") filtered = filtered.filter(s => s.assign === currentTeamFilter);
         if (currentPhaseFilter !== "all") filtered = filtered.filter(s => s.phase === currentPhaseFilter);
 
@@ -312,11 +342,16 @@ screensDB.filter(s => s.assign === "Ahmetou").forEach(s => console.log(`- ${s.ti
             `;
 
             group.forEach(screen => {
+                // إضافة زر الحذف بجانب كل صورة - مع الحفاظ على اسم الصورة الأصلي تمامًا وعدم تغيير أي شيء آخر
                 html += `
                     <div class="screen-card bg-white rounded-2xl overflow-hidden shadow-md cursor-pointer hover:shadow-2xl" onclick='showTechModal(${JSON.stringify(screen).replace(/'/g, "\\'")})'>
-                        <div class="relative">
+                        <div class="img-wrapper relative">
                             <img src="${screen.src}" class="w-full aspect-[9/19] object-cover bg-gray-100" alt="${screen.title}" 
                                  onerror="this.src='https://placehold.co/300x570?text=${encodeURIComponent(screen.title)}&font=cairo'">
+                            <!-- زر الحذف الخاص بكل صورة، عند الضغط عليه يتم حذف الشاشة فوراً -->
+                            <button class="delete-image-btn" onclick="deleteScreen(${screen.id}, event)">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
                             <div class="absolute top-3 right-3 bg-black/70 text-white text-[10px] px-2.5 py-1 rounded-full font-medium">
                                 ${screen.assign}
                             </div>
